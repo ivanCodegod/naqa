@@ -1,29 +1,35 @@
+import grequests
 import requests
 
 
-#  Get Accreditation list(all available)
-#  https://public.naqa.gov.ua/api/v1/Accreditation/Get
-
-#  Get Concrete Accreditation
-#  https://public.naqa.gov.ua/api/v1/Accreditation/{id}/Get
-
 def get_all_accreditation_by_area(area="04"):
-    # "accreditationId": xxxx - is actual id could be found
-    #req = requests.get("https://public.naqa.gov.ua/api/v1/Accreditation/Get", verify=False)
-    req = requests.get(f"https://public.naqa.gov.ua/api/Accreditation/Get?$count=true&$skip=0&$orderBy=id%20desc&$filter=contains(tolower(area),%20%27{area}%27)", verify=False)
-    json_data = req.json()
-    return json_data
+    """Get all accreditation cases depends on area specified."""
+    # TODO: Add logic with area defining. Not here
+    all_accreditation = requests.get(
+        f"https://public.naqa.gov.ua/api/Accreditation/Get?$count=true&$skip=0&$orderBy=id%20desc"
+        f"&$filter=contains(tolower(area),%20%27{area}%27)", verify=False)
+
+    all_accreditation_json = get_response_json(all_accreditation)
+    return all_accreditation_json
 
 
-def get_accreditation_by_id(id):
-    req = requests.get(f"https://public.naqa.gov.ua/api/v1/Accreditation/{id}/Get", verify=False)
-    json_data = req.json()
-    return json_data
+def get_accreditation_response_list(accreditation_ids):
+    """Get generated responses of accreditation cases."""
+    # TODO: Error handling and retry, timeout
+    accreditation_requests = [
+        f"https://public.naqa.gov.ua/api/v1/Accreditation/{acr_id}/Get" for acr_id in accreditation_ids
+    ]
+    accreditation_response = (grequests.get(url, verify=False) for url in accreditation_requests)
+    accreditation_response_list = grequests.map(accreditation_response)
+
+    return accreditation_response_list
+
+
+def get_response_json(response):
+    """Return response in json format."""
+    return response.json()
 
 
 def collect_accreditation_id(all_accreditation):
-    program_list = []
-    for i in all_accreditation["items"]:
-        program_list.append(i["accreditationId"])
-
-    return program_list
+    """Collect accreditation id from all accreditations."""
+    return [accreditation["accreditationId"] for accreditation in all_accreditation["items"]]
