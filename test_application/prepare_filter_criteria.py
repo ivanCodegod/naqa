@@ -18,36 +18,56 @@ OP_NAME = "Назва ОП"
 RESULTS_OD_CONSIDERATION_OF_THE_EG = "За результатами розгляду акредитаційної справи ЕГ"
 RESULTS_OD_CONSIDERATION_OF_THE_GER = "За результатами розгляду акредитаційної справи ГЕР"
 RESULTS_OD_CONSIDERATION_OF_THE_NA = "За результатами розгляду акредитаційної справи НА"
-DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EXPERT_GROUP = "Дата наказу НА про призначення експертної групи"
-NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EXPERT_GROUP = "Номер наказу НА про призначення експертної групи"
+DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG = "Дата наказу НА про призначення експертної групи"
+NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG = "Номер наказу НА про призначення експертної групи"
 DEPARTURE_START_DATE = "Дата початку виїзду"
 LAST_NAME_OF_EXPERT_LEADER = "Прізвище лідера експертної групи"
 LAST_NAME_OF_EXPERT = "Прізвище експерта"
 SURNAME_OF_GER_SPEAKER = "Прізвище доповідача ГЕР"
 
 # Compliance level criterion constants for EG
-OP_COMPLIANCE_LEVEL_CRITERION_1_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 1 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_2_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 2 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_3_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 3 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_4_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 4 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_5_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 5 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_6_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 6 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_7_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 7 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_8_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 8 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_9_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 9 акредитації, згідно з висновком експертної групи"
-OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_EXPERT_GROUP = "Рівень відповідності ОП Критерію 10 акредитації, згідно з висновком експертної групи"
+OP_COMPLIANCE_LVL_CRITERION_1_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 1 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_2_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 2 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_3_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 3 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_4_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 4 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_5_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 5 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_6_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 6 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_7_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 7 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_8_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 8 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_9_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 9 акредитації, згідно з висновком " \
+                                                "експертної групи "
+OP_COMPLIANCE_LVL_CRITERION_10_ACCORDING_TO_EG = "Рівень відповідності ОП Критерію 10 акредитації, згідно з висновком " \
+                                                 "експертної групи "
 
 # Compliance level criterion constants for GER
-OP_COMPLIANCE_LEVEL_CRITERION_1_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 1 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_2_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 2 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_3_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 3 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_4_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 4 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_5_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 5 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_6_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 6 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_7_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 7 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_8_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 8 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_9_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 9 акредитації, згідно з висновком ГЕР"
-OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 10 акредитації, згідно з висновком ГЕР"
+OP_COMPLIANCE_LEVEL_CRITERION_1_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 1 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_2_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 2 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_3_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 3 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_4_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 4 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_5_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 5 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_6_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 6 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_7_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 7 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_8_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 8 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_9_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 9 акредитації, згідно з " \
+                                                   "висновком ГЕР "
+OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 10 акредитації, згідно з " \
+                                                    "висновком ГЕР "
 
 
 def prepare_filter_criteria():
@@ -79,9 +99,9 @@ def prepare_filter_criteria():
 
     # В формате год-месяц-день
     exp_date_of_na_order_on_appointment_of_expert_group = input(
-        f"Enter expected '{DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EXPERT_GROUP}': ")
+        f"Enter expected '{DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG}': ")
     exp_number_of_na_order_on_appointment_of_expert_group = input(
-        f"Enter expected '{NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EXPERT_GROUP}': ")
+        f"Enter expected '{NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG}': ")
     exp_departure_start_date = input(f"Enter expected '{DEPARTURE_START_DATE}': ")
 
     # TODO: Update last_name_of_expert_leader to find only by last name. For now we need specify Full name
@@ -92,25 +112,25 @@ def prepare_filter_criteria():
 
     # EG
     exp_op_compliance_level_criterion_1_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_1_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_1_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_2_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_2_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_2_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_3_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_3_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_3_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_4_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_4_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_4_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_5_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_5_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_5_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_6_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_6_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_6_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_7_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_7_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_7_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_8_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_8_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_8_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_9_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_9_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_9_ACCORDING_TO_EG}': ")
     exp_op_compliance_level_criterion_10_according_to_expert_group = input(
-        f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_EXPERT_GROUP}': ")
+        f"Enter expected '{OP_COMPLIANCE_LVL_CRITERION_10_ACCORDING_TO_EG}': ")
 
     # Compliance level criterion constants for GER
     exp_op_compliance_level_criterion_1_according_to_ger = input(
@@ -177,11 +197,11 @@ def prepare_filter_criteria():
         exp_date_of_na_order_on_appointment_of_expert_group += "T00:00:00"
         criteria.append([get_date_of_na_order_on_appointment_of_expert_group,
                          exp_date_of_na_order_on_appointment_of_expert_group])
-        csv_table_headers.append(DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EXPERT_GROUP)
+        csv_table_headers.append(DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG)
     if exp_number_of_na_order_on_appointment_of_expert_group:
         criteria.append([get_number_of_na_order_on_appointment_of_expert_group,
                          exp_number_of_na_order_on_appointment_of_expert_group])
-        csv_table_headers.append(NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EXPERT_GROUP)
+        csv_table_headers.append(NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG)
     if exp_departure_start_date:
         exp_departure_start_date += "T00:00:00"
         criteria.append([get_departure_start_date, exp_departure_start_date])
@@ -198,43 +218,43 @@ def prepare_filter_criteria():
     if exp_op_compliance_level_criterion_1_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_1_according_to_expert_group,
                          exp_op_compliance_level_criterion_1_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_1_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_1_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_2_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_2_according_to_expert_group,
                          exp_op_compliance_level_criterion_2_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_2_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_2_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_3_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_3_according_to_expert_group,
                          exp_op_compliance_level_criterion_3_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_3_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_3_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_4_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_4_according_to_expert_group,
                          exp_op_compliance_level_criterion_4_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_4_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_4_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_5_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_5_according_to_expert_group,
                          exp_op_compliance_level_criterion_5_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_5_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_5_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_6_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_6_according_to_expert_group,
                          exp_op_compliance_level_criterion_6_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_6_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_6_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_7_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_7_according_to_expert_group,
                          exp_op_compliance_level_criterion_7_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_7_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_7_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_8_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_8_according_to_expert_group,
                          exp_op_compliance_level_criterion_8_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_8_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_8_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_9_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_9_according_to_expert_group,
                          exp_op_compliance_level_criterion_9_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_9_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_9_ACCORDING_TO_EG)
     if exp_op_compliance_level_criterion_10_according_to_expert_group:
         criteria.append([get_op_compliance_level_criterion_10_according_to_expert_group,
                          exp_op_compliance_level_criterion_10_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_EXPERT_GROUP)
+        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_10_ACCORDING_TO_EG)
 
     # compliance level criterion for GER
     if exp_op_compliance_level_criterion_1_according_to_ger:
