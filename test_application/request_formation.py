@@ -1,5 +1,13 @@
 import grequests
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
+s = requests.Session()
+retries = Retry(total=3, backoff_factor=0.2, raise_on_redirect=True,
+                raise_on_status=True)
+s.mount('http://', HTTPAdapter(max_retries=retries))
+s.mount('https://', HTTPAdapter(max_retries=retries))
 
 
 def get_all_accreditation_by_area(area="04"):

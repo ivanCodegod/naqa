@@ -16,6 +16,7 @@ def filter_accreditation(filtration_criteria_list):
     all_accreditation = get_all_accreditation_by_area()
     accreditation_ids_list = collect_accreditation_id(all_accreditation)
     accreditation_response_list = get_accreditation_response_list(accreditation_ids_list)
+    logging.debug(f"accreditation response list: {accreditation_response_list}")
 
     matched_accreditation = []
     for accr_index, accreditation in enumerate(accreditation_response_list):
