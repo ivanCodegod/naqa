@@ -69,6 +69,64 @@ OP_COMPLIANCE_LEVEL_CRITERION_9_ACCORDING_TO_GER = "Рівень відпові�
 OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_GER = "Рівень відповідності ОП Критерію 10 акредитації, згідно з " \
                                                     "висновком ГЕР "
 
+DEFAULT_CSV_TABLE_HEADERS = [
+    ID_PROGRAM, AC_NUMBER, ID_EDEBO, HIGHER_EDUCATION_NAME,
+    HIGHER_EDUCATION_LEVEL, KNOWLEDGE_AREA, SPECIALITY, OP_NAME]
+
+DEFAULT_FILTRATION_CRITERIA = [
+    get_id_program, get_request_number, get_id_from_edebo, get_higher_education_name,
+    get_higher_education_level_from_all, get_knowledge_area_from_all, get_speciality_from_all, get_op
+]
+
+INPUT_CRITERIA_FUNCTION_LIST = [
+    get_id_program, get_request_number, get_id_from_edebo, get_higher_education_name,
+    get_higher_education_level_from_all, get_knowledge_area_from_all, get_speciality_from_all, get_op,
+    get_results_of_consideration_of_the_eg, get_results_of_consideration_of_the_ger,
+    get_results_of_consideration_of_the_na, get_date_of_na_order_on_appointment_of_expert_group,
+    get_number_of_na_order_on_appointment_of_expert_group, get_departure_start_date,
+    get_last_name_of_expert_leader, get_surname_of_ger_speaker,
+    get_op_compliance_level_criterion_1_according_to_expert_group,
+    get_op_compliance_level_criterion_2_according_to_expert_group,
+    get_op_compliance_level_criterion_3_according_to_expert_group,
+    get_op_compliance_level_criterion_4_according_to_expert_group,
+    get_op_compliance_level_criterion_5_according_to_expert_group,
+    get_op_compliance_level_criterion_6_according_to_expert_group,
+    get_op_compliance_level_criterion_7_according_to_expert_group,
+    get_op_compliance_level_criterion_8_according_to_expert_group,
+    get_op_compliance_level_criterion_9_according_to_expert_group,
+    get_op_compliance_level_criterion_10_according_to_expert_group,
+    get_op_compliance_level_criterion_1_according_to_ger, get_op_compliance_level_criterion_2_according_to_ger,
+    get_op_compliance_level_criterion_3_according_to_ger, get_op_compliance_level_criterion_4_according_to_ger,
+    get_op_compliance_level_criterion_5_according_to_ger, get_op_compliance_level_criterion_6_according_to_ger,
+    get_op_compliance_level_criterion_7_according_to_ger, get_op_compliance_level_criterion_8_according_to_ger,
+    get_op_compliance_level_criterion_9_according_to_ger, get_op_compliance_level_criterion_10_according_to_ger
+]
+CSV_COLUMN_NAME_LIST = [
+    ID_PROGRAM, AC_NUMBER, ID_EDEBO, HIGHER_EDUCATION_NAME, HIGHER_EDUCATION_LEVEL, KNOWLEDGE_AREA, SPECIALITY,
+    OP_NAME, RESULTS_OD_CONSIDERATION_OF_THE_EG, RESULTS_OD_CONSIDERATION_OF_THE_GER,
+    RESULTS_OD_CONSIDERATION_OF_THE_NA, DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG,
+    NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG, DEPARTURE_START_DATE, LAST_NAME_OF_EXPERT_LEADER,
+    SURNAME_OF_GER_SPEAKER,
+    OP_COMPLIANCE_LVL_CRITERION_1_ACCORDING_TO_EG, OP_COMPLIANCE_LVL_CRITERION_2_ACCORDING_TO_EG,
+    OP_COMPLIANCE_LVL_CRITERION_3_ACCORDING_TO_EG, OP_COMPLIANCE_LVL_CRITERION_4_ACCORDING_TO_EG,
+    OP_COMPLIANCE_LVL_CRITERION_5_ACCORDING_TO_EG, OP_COMPLIANCE_LVL_CRITERION_6_ACCORDING_TO_EG,
+    OP_COMPLIANCE_LVL_CRITERION_7_ACCORDING_TO_EG, OP_COMPLIANCE_LVL_CRITERION_8_ACCORDING_TO_EG,
+    OP_COMPLIANCE_LVL_CRITERION_9_ACCORDING_TO_EG, OP_COMPLIANCE_LVL_CRITERION_10_ACCORDING_TO_EG,
+    OP_COMPLIANCE_LEVEL_CRITERION_1_ACCORDING_TO_GER, OP_COMPLIANCE_LEVEL_CRITERION_2_ACCORDING_TO_GER,
+    OP_COMPLIANCE_LEVEL_CRITERION_3_ACCORDING_TO_GER, OP_COMPLIANCE_LEVEL_CRITERION_4_ACCORDING_TO_GER,
+    OP_COMPLIANCE_LEVEL_CRITERION_5_ACCORDING_TO_GER, OP_COMPLIANCE_LEVEL_CRITERION_6_ACCORDING_TO_GER,
+    OP_COMPLIANCE_LEVEL_CRITERION_7_ACCORDING_TO_GER, OP_COMPLIANCE_LEVEL_CRITERION_8_ACCORDING_TO_GER,
+    OP_COMPLIANCE_LEVEL_CRITERION_9_ACCORDING_TO_GER, OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_GER
+]
+
+
+def update_csv_headers(header):
+    default_headers = DEFAULT_CSV_TABLE_HEADERS
+    if header not in default_headers:
+        DEFAULT_CSV_TABLE_HEADERS.append(header)
+
+    return DEFAULT_CSV_TABLE_HEADERS
+
 
 def prepare_filter_criteria():
     """
@@ -154,152 +212,54 @@ def prepare_filter_criteria():
     exp_op_compliance_level_criterion_10_according_to_ger = input(
         f"Enter expected '{OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_GER}': ")
     # TODO: Add Часові межі criteria
+
+    input_criteria_value_list = [
+        exp_id_program, exp_request_number, exp_id_edebo, exp_higher_education_name, exp_higher_education_level,
+        exp_knowledge_area, exp_speciality, exp_op_name, exp_results_of_consideration_of_the_eg,
+        exp_results_of_consideration_of_the_ger, exp_results_of_consideration_of_the_na,
+        exp_date_of_na_order_on_appointment_of_expert_group, exp_number_of_na_order_on_appointment_of_expert_group,
+        exp_departure_start_date, exp_last_name_of_expert_leader, exp_surname_of_ger_speaker,
+        exp_op_compliance_level_criterion_1_according_to_expert_group,
+        exp_op_compliance_level_criterion_2_according_to_expert_group,
+        exp_op_compliance_level_criterion_3_according_to_expert_group,
+        exp_op_compliance_level_criterion_4_according_to_expert_group,
+        exp_op_compliance_level_criterion_5_according_to_expert_group,
+        exp_op_compliance_level_criterion_6_according_to_expert_group,
+        exp_op_compliance_level_criterion_7_according_to_expert_group,
+        exp_op_compliance_level_criterion_8_according_to_expert_group,
+        exp_op_compliance_level_criterion_9_according_to_expert_group,
+        exp_op_compliance_level_criterion_10_according_to_expert_group,
+        exp_op_compliance_level_criterion_1_according_to_ger, exp_op_compliance_level_criterion_2_according_to_ger,
+        exp_op_compliance_level_criterion_3_according_to_ger, exp_op_compliance_level_criterion_4_according_to_ger,
+        exp_op_compliance_level_criterion_5_according_to_ger, exp_op_compliance_level_criterion_6_according_to_ger,
+        exp_op_compliance_level_criterion_7_according_to_ger, exp_op_compliance_level_criterion_8_according_to_ger,
+        exp_op_compliance_level_criterion_9_according_to_ger, exp_op_compliance_level_criterion_10_according_to_ger
+    ]
+
     # Construct table headers for csv file
     csv_table_headers = []
     criteria = []
 
-    # Check if user specified criteria for filtration
-    if exp_id_program:
-        criteria.append([get_id_program, exp_id_program])
-        csv_table_headers.append(ID_PROGRAM)
-    if exp_request_number:
-        criteria.append([get_request_number, exp_request_number])
-        csv_table_headers.append(AC_NUMBER)
-    if exp_id_edebo:
-        criteria.append([get_id_from_edebo, exp_id_edebo])
-        csv_table_headers.append(ID_EDEBO)
-    if exp_higher_education_name:
-        criteria.append([get_higher_education_name, exp_higher_education_name])
-        csv_table_headers.append(HIGHER_EDUCATION_NAME)
-    if exp_higher_education_level:
-        criteria.append([get_higher_education_level_from_all, exp_higher_education_level])
-        csv_table_headers.append(HIGHER_EDUCATION_LEVEL)
-    if exp_knowledge_area:
-        criteria.append([get_knowledge_area_from_all, exp_knowledge_area])
-        csv_table_headers.append(KNOWLEDGE_AREA)
-    if exp_speciality:
-        criteria.append([get_speciality_from_all, exp_speciality])
-        csv_table_headers.append(SPECIALITY)
-    if exp_op_name:
-        criteria.append([get_op, exp_op_name])
-        csv_table_headers.append(OP_NAME)
-    if exp_results_of_consideration_of_the_eg:
-        criteria.append([get_results_of_consideration_of_the_eg, exp_results_of_consideration_of_the_eg])
-        csv_table_headers.append(RESULTS_OD_CONSIDERATION_OF_THE_EG)
-    if exp_results_of_consideration_of_the_ger:
-        criteria.append([get_results_of_consideration_of_the_ger, exp_results_of_consideration_of_the_ger])
-        csv_table_headers.append(RESULTS_OD_CONSIDERATION_OF_THE_GER)
-    if exp_results_of_consideration_of_the_na:
-        criteria.append([get_results_of_consideration_of_the_na, exp_results_of_consideration_of_the_na])
-        csv_table_headers.append(RESULTS_OD_CONSIDERATION_OF_THE_NA)
+    # Construct criteria list and headers for csv file
+    for i in zip(INPUT_CRITERIA_FUNCTION_LIST, input_criteria_value_list, CSV_COLUMN_NAME_LIST):
+        current_criteria_value = i[1]
+        current_criteria_function = i[0]
+        current_column_name = i[2]
+
+        if current_criteria_value:
+            csv_table_headers = update_csv_headers(current_column_name)
+
+        if current_criteria_function in DEFAULT_FILTRATION_CRITERIA and not current_criteria_value:
+            criteria.append([current_criteria_function, "default_criteria"])
+        elif current_criteria_value != '':
+            criteria.append([current_criteria_function, current_criteria_value])
+
     # TODO: Add get_date_of_na_adoption_on_op_accreditation criteria
-    if exp_date_of_na_order_on_appointment_of_expert_group:
-        exp_date_of_na_order_on_appointment_of_expert_group += "T00:00:00"
-        criteria.append([get_date_of_na_order_on_appointment_of_expert_group,
-                         exp_date_of_na_order_on_appointment_of_expert_group])
-        csv_table_headers.append(DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG)
-    if exp_number_of_na_order_on_appointment_of_expert_group:
-        criteria.append([get_number_of_na_order_on_appointment_of_expert_group,
-                         exp_number_of_na_order_on_appointment_of_expert_group])
-        csv_table_headers.append(NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG)
-    if exp_departure_start_date:
-        exp_departure_start_date += "T00:00:00"
-        criteria.append([get_departure_start_date, exp_departure_start_date])
-        csv_table_headers.append(DEPARTURE_START_DATE)
-    if exp_last_name_of_expert_leader:
-        criteria.append([get_last_name_of_expert_leader, exp_last_name_of_expert_leader])
-        csv_table_headers.append(LAST_NAME_OF_EXPERT_LEADER)
     # TODO: Add get_last_name_of_expert criteria
-    if exp_surname_of_ger_speaker:
-        criteria.append([get_surname_of_ger_speaker, exp_surname_of_ger_speaker])
-        csv_table_headers.append(SURNAME_OF_GER_SPEAKER)
-
-    # compliance level criterion for EG
-    if exp_op_compliance_level_criterion_1_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_1_according_to_expert_group,
-                         exp_op_compliance_level_criterion_1_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_1_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_2_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_2_according_to_expert_group,
-                         exp_op_compliance_level_criterion_2_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_2_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_3_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_3_according_to_expert_group,
-                         exp_op_compliance_level_criterion_3_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_3_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_4_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_4_according_to_expert_group,
-                         exp_op_compliance_level_criterion_4_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_4_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_5_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_5_according_to_expert_group,
-                         exp_op_compliance_level_criterion_5_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_5_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_6_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_6_according_to_expert_group,
-                         exp_op_compliance_level_criterion_6_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_6_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_7_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_7_according_to_expert_group,
-                         exp_op_compliance_level_criterion_7_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_7_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_8_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_8_according_to_expert_group,
-                         exp_op_compliance_level_criterion_8_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_8_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_9_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_9_according_to_expert_group,
-                         exp_op_compliance_level_criterion_9_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_9_ACCORDING_TO_EG)
-    if exp_op_compliance_level_criterion_10_according_to_expert_group:
-        criteria.append([get_op_compliance_level_criterion_10_according_to_expert_group,
-                         exp_op_compliance_level_criterion_10_according_to_expert_group])
-        csv_table_headers.append(OP_COMPLIANCE_LVL_CRITERION_10_ACCORDING_TO_EG)
-
-    # compliance level criterion for GER
-    if exp_op_compliance_level_criterion_1_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_1_according_to_ger,
-                         exp_op_compliance_level_criterion_1_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_1_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_2_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_2_according_to_ger,
-                         exp_op_compliance_level_criterion_2_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_2_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_3_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_3_according_to_ger,
-                         exp_op_compliance_level_criterion_3_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_3_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_4_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_4_according_to_ger,
-                         exp_op_compliance_level_criterion_4_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_4_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_5_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_5_according_to_ger,
-                         exp_op_compliance_level_criterion_5_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_5_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_6_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_6_according_to_ger,
-                         exp_op_compliance_level_criterion_6_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_6_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_7_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_7_according_to_ger,
-                         exp_op_compliance_level_criterion_7_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_7_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_8_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_8_according_to_ger,
-                         exp_op_compliance_level_criterion_8_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_8_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_9_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_9_according_to_ger,
-                         exp_op_compliance_level_criterion_9_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_9_ACCORDING_TO_GER)
-    if exp_op_compliance_level_criterion_10_according_to_ger:
-        criteria.append([get_op_compliance_level_criterion_10_according_to_ger,
-                         exp_op_compliance_level_criterion_10_according_to_ger])
-        csv_table_headers.append(OP_COMPLIANCE_LEVEL_CRITERION_10_ACCORDING_TO_GER)
+    # TODO: Add get_time_na_meeting criteria
 
     logging.info("Criteria list: %s", criteria)
-    logging.info("Scv table headers: %s", csv_table_headers)
+    logging.info("Csv table headers: %s", csv_table_headers)
 
     build_csv([csv_table_headers])
     return criteria

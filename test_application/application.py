@@ -28,15 +28,25 @@ def filter_accreditation(filtration_criteria_list):
         row_in_csv = []
         for i in filtration_criteria_list:
             filter_criteria = i[0]
+            current_filter_value = i[1]
 
             # if filtration parameter could be parsed only from all accreditation request
             if "from_all" in str(filter_criteria).split()[1]:
+                logging.debug("all option - id=%s", accreditation_ids_list[accr_index])
+                logging.debug("func name-%s", str(filter_criteria).split()[1])
                 response_body = all_accreditation
                 current_filter_criteria = str(filter_criteria(response_body, accr_index))
             else:
-                current_filter_criteria = str(filter_criteria(response_body))
+                logging.debug("NOT all option - id=%s", accreditation_ids_list[accr_index])
+                # TODO: Add handling if there no parsed data
+                current_filter_criteria = str(filter_criteria(get_response_json(accreditation)))
 
-            if current_filter_criteria == i[1]:
+            if current_filter_value == 'default_criteria':
+                # TODO: Поправить так чтоб не было всех проверок когда у нас пустое значение критерия. Нужно только для дефолтных
+                matched = True
+                row_in_csv.append(current_filter_criteria)
+
+            elif current_filter_criteria == i[1]:
                 matched = True
                 row_in_csv.append(i[1])
             else:
