@@ -139,8 +139,17 @@ def prepare_filter_criteria():
 
     # Collect all filtration criteria from user to make a filtration of accreditation cases.
     logging.info("Specify filtration criteria.\n")
-    logging.info(
-        "Test Input Filtration: 5329 2248/АС-21 50265 Київська православна богословська академія Доктор філософії\n")
+    logging.info("'ID': '6246'")
+    logging.info("'Номер AC': '0793/АС-22'")
+    logging.info("'ID програми в ЄДЕБО': 43443")
+    logging.info('Назва університету: Комунальний заклад "Уманський гуманітарно-педагогічний фаховий коледж ім. Т.Г. Шевченка Черкаської обласної ради"')
+    logging.info("'Рівень вищої освіти': Бакалавр")
+    logging.info("'Галузь знань': 01 Освіта/Педагогіка")
+    logging.info("'Спеціальність': 014 Середня освіта")
+    logging.info("'Назва ОП': Середня освіта (Музичне мистецтво). Музичне мистецтво в закладі дошкільної освіти")
+
+
+
     exp_id_program = input(f"Enter expected '{ID_PROGRAM}': ")
     exp_request_number = input(f"Enter expected '{AC_NUMBER}': ")
     exp_id_edebo = input(f"Enter expected '{ID_EDEBO}': ")

@@ -23,7 +23,8 @@ def filter_accreditation(filtration_criteria_list):
         logging.debug("Current accreditation id: %s", accreditation_ids_list[accr_index])
 
         response_body = get_response_json(accreditation)
-        matched = False
+        logging.debug(f"response_body: {response_body}")
+        matched = [False]
 
         row_in_csv = []
         for i in filtration_criteria_list:
@@ -35,26 +36,31 @@ def filter_accreditation(filtration_criteria_list):
                 logging.debug("all option - id=%s", accreditation_ids_list[accr_index])
                 logging.debug("func name-%s", str(filter_criteria).split()[1])
                 response_body = all_accreditation
-                current_filter_criteria = str(filter_criteria(response_body, accr_index))
+                try:
+                    current_filter_criteria = str(filter_criteria(response_body, accr_index))
+                except TypeError:
+                    matched[0] = False
+                    break
             else:
                 logging.debug("NOT all option - id=%s", accreditation_ids_list[accr_index])
-                # TODO: Add handling if there no parsed data
-                current_filter_criteria = str(filter_criteria(get_response_json(accreditation)))
+                try:
+                    current_filter_criteria = str(filter_criteria(get_response_json(accreditation)))
+                except TypeError:
+                    matched[0] = False
+                    break
 
             if current_filter_value == 'default_criteria':
-                # TODO: Поправить так чтоб не было всех проверок когда у нас пустое значение критерия. Нужно только для дефолтных
-                matched = True
+                matched[0] = True
                 row_in_csv.append(current_filter_criteria)
-
             elif current_filter_criteria == i[1]:
-                matched = True
+                matched[0] = True
                 row_in_csv.append(i[1])
             else:
-                matched = False
+                matched[0] = False
                 logging.debug("Filtration was failed for accreditation with id=%s.", accreditation_ids_list[accr_index])
                 break
 
-        if matched:
+        if matched[0]:
             logging.info("Accreditation with id=%s is fits the filtration!", accreditation_ids_list[accr_index])
             matched_accreditation.append(accreditation_ids_list[accr_index])
 
