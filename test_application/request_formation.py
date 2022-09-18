@@ -1,10 +1,12 @@
 import grequests
 import requests
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from urllib3.util import Retry
+
+RETRY_COUNT = 5
 
 s = requests.Session()
-retries = Retry(total=3, backoff_factor=0.2, raise_on_redirect=True,
+retries = Retry(total=RETRY_COUNT, backoff_factor=0.2, raise_on_redirect=True,
                 raise_on_status=True)
 s.mount('http://', HTTPAdapter(max_retries=retries))
 s.mount('https://', HTTPAdapter(max_retries=retries))
@@ -17,13 +19,17 @@ def get_all_accreditation_by_area(area="04"):
         f"https://public.naqa.gov.ua/api/Accreditation/Get?$count=true&$skip=0&$orderBy=id%20desc"
         f"&$filter=contains(tolower(area),%20%27{area}%27)", verify=False)
 
-    all_accreditation_json = get_response_json(all_accreditation)
+    return all_accreditation
+
+
+def parse_all_accreditation_by_area():
+    """Parse all accreditation cases."""
+    all_accreditation_json = get_response_json(get_all_accreditation_by_area())
     return all_accreditation_json
 
 
 def get_accreditation_response_list(accreditation_ids):
     """Get generated responses of accreditation cases."""
-    # TODO: Error handling and retry, timeout
     accreditation_requests = [
         f"https://public.naqa.gov.ua/api/v1/Accreditation/{acr_id}/Get" for acr_id in accreditation_ids
     ]

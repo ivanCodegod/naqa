@@ -96,7 +96,8 @@ def get_results_of_consideration_of_the_na(response):
     # 2 - Акредитувати освітню програму умовно (відкладено)
     # 3 - Відмовити в акредитації освітньої програми
     # 4 - Акредитувати освітню програму
-    # 6 - Відмовити в акредитації освітньої програми з підстав, не пов'язаних з відповідністю Критеріям оцінювання якості освітньої програми.
+    # 6 - Відмовити в акредитації освітньої програми з підстав,
+    # не пов'язаних з відповідністю Критеріям оцінювання якості освітньої програми.
     # 7 - Призначити повторну акредитаційну експертизу
     # 8 - Повернути справу до галузевої експертної ради для повторного розгляду
 
@@ -111,7 +112,8 @@ def get_results_of_consideration_of_the_na(response):
     elif result == 4:
         result = 'Акредитувати освітню програму'
     elif result == 6:
-        result = "Відмовити в акредитації освітньої програми з підстав, не пов'язаних з відповідністю Критеріям оцінювання якості освітньої програми."
+        result = "Відмовити в акредитації освітньої програми з підстав, не пов'язаних" \
+                 " з відповідністю Критеріям оцінювання якості освітньої програми."
     elif result == 7:
         result = "Призначити повторну акредитаційну експертизу"
     elif result == 8:
@@ -122,8 +124,9 @@ def get_results_of_consideration_of_the_na(response):
 
 def get_date_of_na_adoption_on_op_accreditation(response):
     """Дата прийняття НА рішення щодо акредитації ОП"""
-    # TODO: Finish
-    pass
+    # TODO: Where to find? Это "Дата засідання НА"?
+    # In format "2022-03-01T14:00:00"
+    # return response["naqaAppointmentMeeting"]["meetingDate"]
 
 
 def get_date_of_na_order_on_appointment_of_expert_group(response):
@@ -144,16 +147,19 @@ def get_departure_start_date(response):
 
 
 def get_last_name_of_expert_leader(response):
-    """Прізвище лідера експертної групи"""
+    """Прізвище керівника експертної групи"""
     # ФИО лидера
     return response["accreditationOrders"][0]["leaderExpertGroup"]["name"]
 
 
 def get_last_name_of_expert(response):
     """Прізвище експерта"""
-    # Список ФИО экспертов. Нужно придумать как обходить всех експертов
-    # TODO: Нужно придумать как обходить всех експертов
-    return response["accreditationOrders"][0]["experts"]
+    # Список ФИО экспертов.
+    experts_list = []
+    for expert in response["accreditationOrders"][0]["experts"]:
+        experts_list.append(expert["name"])
+
+    return experts_list
 
 
 def get_surname_of_ger_speaker(response):
