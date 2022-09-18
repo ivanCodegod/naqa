@@ -152,6 +152,7 @@ def get_last_name_of_expert_leader(response):
 def get_last_name_of_expert(response):
     """Прізвище експерта"""
     # Список ФИО экспертов. Нужно придумать как обходить всех експертов
+    # TODO: Нужно придумать как обходить всех експертов
     return response["accreditationOrders"][0]["experts"]
 
 

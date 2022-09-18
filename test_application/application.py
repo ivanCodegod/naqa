@@ -16,14 +16,13 @@ def filter_accreditation(filtration_criteria_list):
     all_accreditation = get_all_accreditation_by_area()
     accreditation_ids_list = collect_accreditation_id(all_accreditation)
     accreditation_response_list = get_accreditation_response_list(accreditation_ids_list)
-    logging.debug(f"accreditation response list: {accreditation_response_list}")
 
     matched_accreditation = []
     for accr_index, accreditation in enumerate(accreditation_response_list):
         logging.debug("Current accreditation id: %s", accreditation_ids_list[accr_index])
 
         response_body = get_response_json(accreditation)
-        logging.debug(f"response_body: {response_body}")
+
         matched = [False]
 
         row_in_csv = []
@@ -35,17 +34,18 @@ def filter_accreditation(filtration_criteria_list):
             if "from_all" in str(filter_criteria).split()[1]:
                 logging.debug("all option - id=%s", accreditation_ids_list[accr_index])
                 logging.debug("func name-%s", str(filter_criteria).split()[1])
+
                 response_body = all_accreditation
                 try:
                     current_filter_criteria = str(filter_criteria(response_body, accr_index))
-                except TypeError:
+                except (TypeError, AttributeError):
                     matched[0] = False
                     break
             else:
                 logging.debug("NOT all option - id=%s", accreditation_ids_list[accr_index])
                 try:
                     current_filter_criteria = str(filter_criteria(get_response_json(accreditation)))
-                except TypeError:
+                except (TypeError, AttributeError):
                     matched[0] = False
                     break
 
