@@ -131,7 +131,6 @@ def get_date_of_na_adoption_on_op_accreditation(response):
 
 def get_date_of_na_order_on_appointment_of_expert_group(response):
     """Дата наказу НА про призначення експертної групи"""
-    # in format 2021-12-09T00:00:00
     return response["accreditationOrders"][0]["orderDate"]
 
 
@@ -142,19 +141,16 @@ def get_number_of_na_order_on_appointment_of_expert_group(response):
 
 def get_departure_start_date(response):
     """Дата початку виїзду"""
-    # in format 2021-12-09T00:00:00
     return response["accreditationOrders"][0]["dateStart"]
 
 
 def get_last_name_of_expert_leader(response):
     """Прізвище керівника експертної групи"""
-    # ФИО лидера
     return response["accreditationOrders"][0]["leaderExpertGroup"]["name"]
 
 
 def get_last_name_of_expert(response):
     """Прізвище експерта"""
-    # Список ФИО экспертов.
     experts_list = []
     for expert in response["accreditationOrders"][0]["experts"]:
         experts_list.append(expert["name"])
@@ -164,7 +160,6 @@ def get_last_name_of_expert(response):
 
 def get_surname_of_ger_speaker(response):
     """Прізвище доповідача ГЕР"""
-    # ФИО спикера
     return response["branchSpeaker"]["speaker"]["name"]
 
 

@@ -28,10 +28,10 @@ def parse_all_accreditation_by_area():
     return all_accreditation_json
 
 
-def get_accreditation_response_list(accreditation_ids):
+def get_accreditation_response_list(accr_ids):
     """Get generated responses of accreditation cases."""
     accreditation_requests = [
-        f"https://public.naqa.gov.ua/api/v1/Accreditation/{acr_id}/Get" for acr_id in accreditation_ids
+        f"https://public.naqa.gov.ua/api/v1/Accreditation/{acr_id}/Get" for acr_id in accr_ids
     ]
     accreditation_response = (grequests.get(url, verify=False) for url in accreditation_requests)
     accreditation_response_list = grequests.map(accreditation_response)
