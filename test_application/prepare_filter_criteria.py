@@ -12,6 +12,7 @@ from constants import \
     RESULTS_OD_CONSIDERATION_OF_THE_EG, \
     RESULTS_OD_CONSIDERATION_OF_THE_GER, \
     RESULTS_OD_CONSIDERATION_OF_THE_NA, \
+    DATE_OF_NA_ADOPTION_ON_OP_ACCREDITATION, \
     DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG, \
     NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG, \
     DEPARTURE_START_DATE, \
@@ -43,6 +44,10 @@ from constants import \
     INPUT_CRITERIA_FUNCTION_LIST, \
     CSV_COLUMN_NAME_LIST
 
+IN_FORMAT_YEAR_MONTH_DAY = 'В форматі "рік-місяць-день"'
+IN_FORMAT_YEAR_MONTH_DAY_T = 'В форматі "рік-місяць-деньTгодини:хвилини:секунди"'
+IN_FORMAT_FULL_NAME = "В форматі 'Прізвище Ім'я По-батькові'"
+
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)
 logging.basicConfig()
@@ -62,6 +67,7 @@ def update_csv_headers(header):
 
 
 def input_filtration_criteria(criteria, additional_comment=""):
+    """Decorate text connected with filter parameter."""
     text = f"Введіть очікуваний '{criteria}' параметр для фільтрації"
     return text + ": " if not additional_comment else text + "." + f" {additional_comment}: "
 
@@ -88,28 +94,35 @@ def get_input_criteria():
     exp_results_of_consideration_of_the_ger = input(
         input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_GER)
     )
+    # TODO: Add info that we need to pass numbers
     exp_results_of_consideration_of_the_na = input(
-        input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_NA)
+        input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_NA, IN_FORMAT_YEAR_MONTH_DAY)
     )
-    # TODO: Add exp get_date_of_na_adoption_on_op_accreditation criteria
-
+    exp_date_of_na_adoption_on_op_accreditation = input(
+        input_filtration_criteria(DATE_OF_NA_ADOPTION_ON_OP_ACCREDITATION, IN_FORMAT_YEAR_MONTH_DAY)
+    )
     exp_date_of_na_order_on_appointment_of_expert_group = input(
-        input_filtration_criteria(DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG, 'В форматі "рік-місяць-деньT00:00:00"')
+        input_filtration_criteria(DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG, IN_FORMAT_YEAR_MONTH_DAY)
     )
+    if exp_date_of_na_order_on_appointment_of_expert_group:
+        exp_date_of_na_order_on_appointment_of_expert_group += "T00:00:00"
+
     exp_number_of_na_order_on_appointment_of_expert_group = input(
         input_filtration_criteria(NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG)
     )
     exp_departure_start_date = input(
-        input_filtration_criteria(DEPARTURE_START_DATE, 'В форматі "рік-місяць-деньT00:00:00"')
+        input_filtration_criteria(DEPARTURE_START_DATE, IN_FORMAT_YEAR_MONTH_DAY)
     )
+    if exp_departure_start_date:
+        exp_departure_start_date += "T00:00:00"
     exp_last_name_of_expert_leader = input(
-        input_filtration_criteria(LAST_NAME_OF_EXPERT_LEADER, "В форматі 'Прізвище Ім'я По-батькові'")
+        input_filtration_criteria(LAST_NAME_OF_EXPERT_LEADER, IN_FORMAT_FULL_NAME)
     )
     exp_get_last_name_of_expert = input(
-        input_filtration_criteria(LAST_NAME_OF_EXPERT, "В форматі 'Прізвище Ім'я По-батькові'")
+        input_filtration_criteria(LAST_NAME_OF_EXPERT, IN_FORMAT_FULL_NAME)
     )
     exp_surname_of_ger_speaker = input(
-        input_filtration_criteria(SURNAME_OF_GER_SPEAKER, "В форматі 'Прізвище Ім'я По-батькові'")
+        input_filtration_criteria(SURNAME_OF_GER_SPEAKER, IN_FORMAT_FULL_NAME)
     )
 
     # EG
@@ -169,6 +182,7 @@ def get_input_criteria():
         exp_results_of_consideration_of_the_eg,
         exp_results_of_consideration_of_the_ger,
         exp_results_of_consideration_of_the_na,
+        exp_date_of_na_adoption_on_op_accreditation,
         exp_date_of_na_order_on_appointment_of_expert_group,
         exp_number_of_na_order_on_appointment_of_expert_group,
         exp_departure_start_date,
@@ -223,11 +237,10 @@ def prepare_filter_criteria(input_criteria_value_list):
         elif current_criteria_value != '':
             criteria.append([current_criteria_function, current_criteria_value])
 
-    # TODO: Add get_date_of_na_adoption_on_op_accreditation criteria
     # TODO: Add get_time_na_meeting criteria
 
-    logging.info("Criteria list: %s", criteria)
-    logging.info("Csv table headers: %s", csv_table_headers)
+    logging.debug("Criteria list: %s", criteria)
+    logging.debug("Csv table headers: %s", csv_table_headers)
 
     build_csv([csv_table_headers])
     return criteria

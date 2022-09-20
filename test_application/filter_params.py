@@ -124,9 +124,7 @@ def get_results_of_consideration_of_the_na(response):
 
 def get_date_of_na_adoption_on_op_accreditation(response):
     """Дата прийняття НА рішення щодо акредитації ОП"""
-    # TODO: Where to find? Это "Дата засідання НА"?
-    # In format "2022-03-01T14:00:00"
-    # return response["naqaAppointmentMeeting"]["meetingDate"]
+    return response["naqaAppointmentMeeting"]["meetingDate"]
 
 
 def get_date_of_na_order_on_appointment_of_expert_group(response):

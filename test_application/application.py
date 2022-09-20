@@ -22,55 +22,52 @@ def filter_accreditation(filtration_criteria_list):
     matched_accreditation_count = 0
     for accr_index, accreditation in enumerate(accreditation_response_list):
         logging.debug("Current accreditation id: %s", accreditation_ids_list[accr_index])
-
-        response_body = get_response_json(accreditation)
-        matched = [False]
+        matched = False
 
         row_in_csv = []
         for i in filtration_criteria_list:
-            filter_criteria = i[0]
-            current_filter_value = i[1]
+            filter_criteria, current_filter_value = i[0], i[1]
 
             # if filtration parameter could be parsed only from all accreditation request
             if "from_all" in str(filter_criteria).split()[1]:
-                logging.debug("all option - id=%s", accreditation_ids_list[accr_index])
-                logging.debug("func name-%s", str(filter_criteria).split()[1])
-
-                response_body = all_accreditation
+                logging.debug("'From all' option. id=%s", accreditation_ids_list[accr_index])
+                logging.debug("function name=%s", str(filter_criteria).split()[1])
                 try:
-                    current_filter_criteria = str(filter_criteria(response_body, accr_index))
+                    current_filter_criteria = str(filter_criteria(all_accreditation, accr_index))
                 except (TypeError, AttributeError, IndexError):
-                    matched[0] = False
+                    matched = False
                     logging.info("There no such info/path in json body.")
                     break
             else:
-                logging.debug("NOT all option - id=%s", accreditation_ids_list[accr_index])
+                logging.debug("'NOT from all' option. id=%s", accreditation_ids_list[accr_index])
+                logging.debug("function name=%s", str(filter_criteria).split()[1])
                 try:
                     current_filter_criteria = str(filter_criteria(get_response_json(accreditation)))
                 except (TypeError, AttributeError, IndexError):
                     logging.info("There no such info/path in json body.")
-                    matched[0] = False
+                    matched = False
                     break
             if current_filter_value == 'default_criteria':
-                matched[0] = True
+                matched = True
                 row_in_csv.append(current_filter_criteria)
             elif current_filter_criteria == current_filter_value:
-                matched[0] = True
+                matched = True
                 row_in_csv.append(current_filter_value)
             elif "get_last_name_of_expert" in str(filter_criteria):
+                # not standard filtration. Need to filtrate specifically.
                 if current_filter_value in current_filter_criteria:
-                    matched[0] = True
+                    matched = True
                     row_in_csv.append(current_filter_value)
                 else:
-                    matched[0] = False
+                    matched = False
                     break
             else:
-                matched[0] = False
+                matched = False
                 logging.debug(
                     "Filtration was failed for accreditation with id=%s.",
                     accreditation_ids_list[accr_index])
                 break
-        if matched[0]:
+        if matched:
             logging.info(
                 "Accreditation with id=%s is fits the filtration!",
                 accreditation_ids_list[accr_index])
@@ -83,6 +80,7 @@ def filter_accreditation(filtration_criteria_list):
 
 
 def help_list(command):
+    """Function that makes logging depends on user input command."""
     avaliable_commands = \
         'Список доступних команд:\n- "filter" або "f": Почати фільтрацію\n- "help" ' \
         'або "h": Отримати список усіх доступних команд\n- "exit" або "e": Завершити фільтрацію' \
@@ -114,6 +112,7 @@ def main():
         user_command = input()
 
         if user_command in ("filter", "f"):
+            help_list("filter")
             delete_old_csv()
 
             input_criteria_list = get_input_criteria()

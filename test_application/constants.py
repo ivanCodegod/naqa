@@ -52,6 +52,7 @@ OP_NAME = "Назва ОП"
 RESULTS_OD_CONSIDERATION_OF_THE_EG = "За результатами розгляду акредитаційної справи ЕГ"
 RESULTS_OD_CONSIDERATION_OF_THE_GER = "За результатами розгляду акредитаційної справи ГЕР"
 RESULTS_OD_CONSIDERATION_OF_THE_NA = "За результатами розгляду акредитаційної справи НА"
+DATE_OF_NA_ADOPTION_ON_OP_ACCREDITATION = "Дата прийняття НА рішення щодо акредитації ОП"
 DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG = "Дата наказу НА про призначення експертної групи"
 NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG = "Номер наказу НА про призначення експертної групи"
 DEPARTURE_START_DATE = "Дата початку виїзду"
@@ -137,6 +138,7 @@ INPUT_CRITERIA_FUNCTION_LIST = [
     get_results_of_consideration_of_the_eg,
     get_results_of_consideration_of_the_ger,
     get_results_of_consideration_of_the_na,
+    get_date_of_na_adoption_on_op_accreditation,
     get_date_of_na_order_on_appointment_of_expert_group,
     get_number_of_na_order_on_appointment_of_expert_group,
     get_departure_start_date,
@@ -177,6 +179,7 @@ CSV_COLUMN_NAME_LIST = [
     RESULTS_OD_CONSIDERATION_OF_THE_EG,
     RESULTS_OD_CONSIDERATION_OF_THE_GER,
     RESULTS_OD_CONSIDERATION_OF_THE_NA,
+    DATE_OF_NA_ADOPTION_ON_OP_ACCREDITATION,
     DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG,
     NUMBER_OF_NA_ORDER_ON_APPOINTMENT_OF_EG,
     DEPARTURE_START_DATE,
