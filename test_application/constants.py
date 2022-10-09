@@ -103,7 +103,10 @@ OP_COMPL_LEVEL_CRITERION_9_ACC_TO_GER = \
     "Рівень відповідності ОП Критерію 9 акредитації, згідно з висновком ГЕР"
 OP_COMPL_LEVEL_CRITERION_10_ACC_TO_GER = \
     "Рівень відповідності ОП Критерію 10 акредитації, згідно з висновком ГЕР"
-
+TIME_NA_MEETING = "Межі дати засідання НА"
+IN_FORMAT_TIME_NA_MEETING = \
+    "В форматі, через пробіл. " \
+    "Початкова та кінцева дати. Наприклад: 2021-03-01T14:00:00 2022-01-01T14:00:00"
 IN_FORMAT_YEAR_MONTH_DAY = 'В форматі "рік-місяць-день"'
 IN_FORMAT_YEAR_MONTH_DAY_T = \
     'В форматі "рік-місяць-деньTгодини:хвилини:секунди". Наприклад 2022-06-21T10:00:00. '
@@ -195,7 +198,8 @@ INPUT_CRITERIA_FUNCTION_LIST = [
     get_op_compliance_level_criterion_7_according_to_ger,
     get_op_compliance_level_criterion_8_according_to_ger,
     get_op_compliance_level_criterion_9_according_to_ger,
-    get_op_compliance_level_criterion_10_according_to_ger
+    get_op_compliance_level_criterion_10_according_to_ger,
+    get_time_na_meeting
 ]
 
 CSV_COLUMN_NAME_LIST = [
@@ -236,5 +240,6 @@ CSV_COLUMN_NAME_LIST = [
     OP_COMPL_LEVEL_CRITERION_7_ACC_TO_GER,
     OP_COMPL_LEVEL_CRITERION_8_ACC_TO_GER,
     OP_COMPL_LEVEL_CRITERION_9_ACC_TO_GER,
-    OP_COMPL_LEVEL_CRITERION_10_ACC_TO_GER
+    OP_COMPL_LEVEL_CRITERION_10_ACC_TO_GER,
+    TIME_NA_MEETING
 ]

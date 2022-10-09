@@ -49,7 +49,9 @@ from constants import \
     POSSIBLE_VARIANTS_FOR_EG_AND_GER, \
     POSSIBLE_VARIANTS_OF_CONSIDERATION_NA, \
     POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG, \
-    POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+    POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER, \
+    TIME_NA_MEETING, \
+    IN_FORMAT_TIME_NA_MEETING
 
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)
@@ -253,7 +255,12 @@ def get_input_criteria():
             POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
         )
     )
-    # TODO: Add Часові межі criteria
+    exp_time_na_meeting = input(
+        input_filtration_criteria(
+            TIME_NA_MEETING,
+            IN_FORMAT_TIME_NA_MEETING
+        )
+    ).split()
 
     input_criteria_value_list = [
         exp_id_program,
@@ -293,7 +300,8 @@ def get_input_criteria():
         exp_op_compliance_level_criterion_7_according_to_ger,
         exp_op_compliance_level_criterion_8_according_to_ger,
         exp_op_compliance_level_criterion_9_according_to_ger,
-        exp_op_compliance_level_criterion_10_according_to_ger
+        exp_op_compliance_level_criterion_10_according_to_ger,
+        exp_time_na_meeting
     ]
     return input_criteria_value_list
 
@@ -321,8 +329,6 @@ def prepare_filter_criteria(input_criteria_value_list):
             criteria.append([current_criteria_function, "default_criteria"])
         elif current_criteria_value != '':
             criteria.append([current_criteria_function, current_criteria_value])
-
-    # TODO: Add get_time_na_meeting criteria
 
     logging.debug("Criteria list: %s", criteria)
     logging.debug("Csv table headers: %s", csv_table_headers)

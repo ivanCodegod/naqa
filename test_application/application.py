@@ -13,6 +13,7 @@ from prepare_filter_criteria import \
     prepare_filter_criteria, \
     get_input_criteria
 from interface import user_interface
+from manipulate_csv import CSV_FILE_NAME
 
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)
@@ -61,10 +62,22 @@ def filter_accreditation(filtration_criteria_list):
                 matched = True
                 row_in_csv.append(current_filter_value)
             elif "get_last_name_of_expert" in str(filter_criteria):
-                # not standard filtration. Need to filtrate specifically.
+                # not standard filtration. Need to filtrate specifically for last name of expert.
                 if current_filter_value in current_filter_criteria:
                     matched = True
                     row_in_csv.append(current_filter_value)
+                else:
+                    matched = False
+                    break
+            elif "get_time_na_meeting" in str(filter_criteria):
+                # not standard filtration. Need to filtrate specifically for time NA meeting.
+                current_acrr_datetime = current_filter_criteria
+                start_datetime = current_filter_value[0]
+                end_datetime = current_filter_value[1]
+
+                if start_datetime >= current_filter_criteria <= end_datetime:
+                    matched = True
+                    row_in_csv.append(current_filter_criteria)
                 else:
                     matched = False
                     break
@@ -107,8 +120,9 @@ def main():
             time_result = end - start
             logging.debug("Filtration time: %.4f", time_result)
 
-            logging.info("Знайдено акредитаційних справ щодо фільтрації: %s", matched_accr_count)
             logging.info("Усього акредитаційних справ було знайдено: %s", all_accr_count)
+            logging.info("Знайдено акредитаційних справ щодо фільтрації: %s", matched_accr_count)
+            logging.info(f"Файл {CSV_FILE_NAME} було сформовано.")
 
             user_interface("help")
         elif user_command in ("help", "h"):
