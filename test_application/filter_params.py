@@ -244,5 +244,4 @@ def get_time_na_meeting(response):
     Дата засідання НА.
     Часові межі
     """
-    # TODO: Add logic to track the boarders for meeting: from-to.
     return response["naqaAppointmentMeeting"]["meetingDate"]

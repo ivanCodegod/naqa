@@ -260,7 +260,9 @@ def get_input_criteria():
             TIME_NA_MEETING,
             IN_FORMAT_TIME_NA_MEETING
         )
-    ).split()
+    )
+    if exp_time_na_meeting:
+        exp_time_na_meeting = exp_time_na_meeting.split()
 
     input_criteria_value_list = [
         exp_id_program,

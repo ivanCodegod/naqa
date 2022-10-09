@@ -44,7 +44,7 @@ def filter_accreditation(filtration_criteria_list):
                     current_filter_criteria = str(filter_criteria(all_accreditation, accr_index))
                 except (TypeError, AttributeError, IndexError):
                     matched = False
-                    logging.info("There no such info/path in json body.")
+                    logging.debug("There no such info/path in json body.")
                     break
             else:
                 logging.debug("'NOT from all' option. id=%s", accreditation_ids_list[accr_index])
@@ -52,7 +52,7 @@ def filter_accreditation(filtration_criteria_list):
                 try:
                     current_filter_criteria = str(filter_criteria(get_response_json(accreditation)))
                 except (TypeError, AttributeError, IndexError):
-                    logging.info("There no such info/path in json body.")
+                    logging.debug("There no such info/path in json body.")
                     matched = False
                     break
             if current_filter_value == 'default_criteria':
@@ -75,7 +75,7 @@ def filter_accreditation(filtration_criteria_list):
                 start_datetime = current_filter_value[0]
                 end_datetime = current_filter_value[1]
 
-                if start_datetime >= current_filter_criteria <= end_datetime:
+                if start_datetime <= current_acrr_datetime <= end_datetime:
                     matched = True
                     row_in_csv.append(current_filter_criteria)
                 else:
