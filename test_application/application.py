@@ -121,10 +121,10 @@ def main():
             start = time.time()
             matched_accr_count, all_accr_count = filter_accreditation(criteria_list)
 
-            # TODO: Создать декоратор который будет считать время выполнения фильтрации
+            # For debug
             end = time.time()
             time_result = end - start
-            logging.debug("Program execution time: %.4f", time_result)
+            logging.debug("Filtration time: %.4f", time_result)
 
             logging.info("Знайдено акредитаційних справ щодо фільтрації: %s", matched_accr_count)
             logging.info("Усього акредитаційних справ було знайдено: %s", all_accr_count)

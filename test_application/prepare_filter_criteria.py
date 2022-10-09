@@ -42,11 +42,14 @@ from constants import \
     DEFAULT_CSV_TABLE_HEADERS, \
     DEFAULT_FILTRATION_CRITERIA, \
     INPUT_CRITERIA_FUNCTION_LIST, \
-    CSV_COLUMN_NAME_LIST
-
-IN_FORMAT_YEAR_MONTH_DAY = 'В форматі "рік-місяць-день"'
-IN_FORMAT_YEAR_MONTH_DAY_T = 'В форматі "рік-місяць-деньTгодини:хвилини:секунди"'
-IN_FORMAT_FULL_NAME = "В форматі 'Прізвище Ім'я По-батькові'"
+    CSV_COLUMN_NAME_LIST, \
+    IN_FORMAT_YEAR_MONTH_DAY, \
+    IN_FORMAT_YEAR_MONTH_DAY_T, \
+    IN_FORMAT_FULL_NAME, \
+    POSSIBLE_VARIANTS_FOR_EG_AND_GER, \
+    POSSIBLE_VARIANTS_OF_CONSIDERATION_NA, \
+    POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG, \
+    POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
 
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)
@@ -84,22 +87,24 @@ def get_input_criteria():
     exp_id_edebo = input(input_filtration_criteria(ID_EDEBO))
     exp_higher_education_name = input(input_filtration_criteria(HIGHER_EDUCATION_NAME))
     exp_higher_education_level = input(input_filtration_criteria(HIGHER_EDUCATION_LEVEL))
-    # TODO: Сделать выбор галузи сразу перед фильтрацией и потом уже по галузи делать фильтрацию. Убрать этот фильтр
     exp_knowledge_area = input(input_filtration_criteria(KNOWLEDGE_AREA))
     exp_speciality = input(input_filtration_criteria(SPECIALITY))
     exp_op_name = input(input_filtration_criteria(OP_NAME))
     exp_results_of_consideration_of_the_eg = input(
-        input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_EG)
+        input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_EG,
+                                  POSSIBLE_VARIANTS_FOR_EG_AND_GER)
     )
     exp_results_of_consideration_of_the_ger = input(
-        input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_GER)
+        input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_GER,
+                                  POSSIBLE_VARIANTS_FOR_EG_AND_GER)
     )
-    # TODO: Add info that we need to pass numbers
     exp_results_of_consideration_of_the_na = input(
-        input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_NA, IN_FORMAT_YEAR_MONTH_DAY)
+        input_filtration_criteria(RESULTS_OD_CONSIDERATION_OF_THE_NA,
+                                  POSSIBLE_VARIANTS_OF_CONSIDERATION_NA)
     )
     exp_date_of_na_adoption_on_op_accreditation = input(
-        input_filtration_criteria(DATE_OF_NA_ADOPTION_ON_OP_ACCREDITATION, IN_FORMAT_YEAR_MONTH_DAY)
+        input_filtration_criteria(DATE_OF_NA_ADOPTION_ON_OP_ACCREDITATION,
+                                  IN_FORMAT_YEAR_MONTH_DAY_T)
     )
     exp_date_of_na_order_on_appointment_of_expert_group = input(
         input_filtration_criteria(DATE_OF_NA_ORDER_ON_APPOINTMENT_OF_EG, IN_FORMAT_YEAR_MONTH_DAY)
@@ -127,47 +132,127 @@ def get_input_criteria():
 
     # EG
     exp_op_compliance_level_criterion_1_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_1_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_1_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_2_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_2_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_2_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_3_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_3_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_3_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_4_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_4_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_4_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_5_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_5_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_5_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_6_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_6_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_6_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_7_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_7_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_7_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_8_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_8_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_8_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_9_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_9_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_9_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
     exp_op_compliance_level_criterion_10_according_to_expert_group = input(
-        input_filtration_criteria(OP_COMPL_LVL_CRITERION_10_ACC_TO_EG))
+        input_filtration_criteria(
+            OP_COMPL_LVL_CRITERION_10_ACC_TO_EG,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG
+        )
+    )
 
     # Compliance level criterion constants for GER
     exp_op_compliance_level_criterion_1_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_1_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_1_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_2_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_2_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_2_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_3_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_3_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_3_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_4_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_4_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_4_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_5_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_5_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_5_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_6_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_6_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_6_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_7_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_7_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_7_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_8_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_8_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_8_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_9_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_9_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_9_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     exp_op_compliance_level_criterion_10_according_to_ger = input(
-        input_filtration_criteria(OP_COMPL_LEVEL_CRITERION_10_ACC_TO_GER))
+        input_filtration_criteria(
+            OP_COMPL_LEVEL_CRITERION_10_ACC_TO_GER,
+            POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER
+        )
+    )
     # TODO: Add Часові межі criteria
 
     input_criteria_value_list = [

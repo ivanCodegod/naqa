@@ -20,19 +20,19 @@ def get_higher_education_name(response):
 
 def get_higher_education_level_from_all(response, index):
     """Рівень вищої освіти"""
-    # Из запроса на все аккредитации
+    # Із запиту на всі акредитації
     return response["items"][index]["programCycleName"]
 
 
 def get_knowledge_area_from_all(response, index):
     """Галузь знань"""
-    # Из запроса на все аккредитации
+    # Із запиту на всі акредитації
     return response["items"][index]["area"]
 
 
 def get_speciality_from_all(response, index):
     """Спеціальність"""
-    # Из запроса на все аккредитации
+    # Із запиту на всі акредитації
     return response["items"][index]["specialityName"]
 
 
@@ -44,12 +44,6 @@ def get_op(response):
 def get_results_of_consideration_of_the_eg(response):
     """За результатами розгляду акредитаційної справи ЕГ"""
     result = response["esResults"]["expertGroupDecision"]
-
-    # 1 - Акредитація з визначенням "зразкова"
-    # 2 - Умовна (відкладена) акредитація == Умовна
-    # 3 - Відмова в акредитації
-    # 4 - Призначення повторної акредитаційної експертизи
-    # 5 - Акредитація
 
     if result == 1:
         result = 'Акредитація з визначенням "зразкова"'
@@ -69,12 +63,6 @@ def get_results_of_consideration_of_the_ger(response):
     """За результатами розгляду акредитаційної справи ГЕР"""
     result = response["besReport"]["accreditationDecision"]
 
-    # 1 - Акредитація з визначенням "зразкова"
-    # 2 - Умовна (відкладена) акредитація == Умовна
-    # 3 - Відмова в акредитації
-    # 4 - Призначення повторної акредитаційної експертизи
-    # 5 - Акредитація
-
     if result == 1:
         result = 'Акредитація з визначенням "зразкова"'
     elif result == 2:
@@ -91,16 +79,6 @@ def get_results_of_consideration_of_the_ger(response):
 
 def get_results_of_consideration_of_the_na(response):
     """За результатами розгляду акредитаційної справи НА"""
-
-    # 1 - Акредитувати освітню програму з визначенням "зразкова"
-    # 2 - Акредитувати освітню програму умовно (відкладено)
-    # 3 - Відмовити в акредитації освітньої програми
-    # 4 - Акредитувати освітню програму
-    # 6 - Відмовити в акредитації освітньої програми з підстав,
-    # не пов'язаних з відповідністю Критеріям оцінювання якості освітньої програми.
-    # 7 - Призначити повторну акредитаційну експертизу
-    # 8 - Повернути справу до галузевої експертної ради для повторного розгляду
-
     result = response["naqaDecision"]["decision"]
 
     if result == 1:
