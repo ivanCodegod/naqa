@@ -13,7 +13,6 @@ AVAILABLE_COMMANDS = [
     ("filter", "f"),
     ("help", "h"),
     ("exit", "e"),
-    ("no_such_command",),
 ]
 
 
