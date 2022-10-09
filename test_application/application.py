@@ -1,11 +1,18 @@
-import sys
 import time
 import logging
 
-from request_formation import collect_accreditation_id, parse_all_accreditation_by_area, \
-    get_accreditation_response_list, get_response_json
-from manipulate_csv import delete_old_csv, build_csv
-from prepare_filter_criteria import prepare_filter_criteria, get_input_criteria
+from request_formation import \
+    collect_accreditation_id, \
+    parse_all_accreditation_by_area, \
+    get_accreditation_response_list, \
+    get_response_json
+from manipulate_csv import \
+    delete_old_csv, \
+    build_csv
+from prepare_filter_criteria import \
+    prepare_filter_criteria, \
+    get_input_criteria
+from interface import user_interface
 
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)
@@ -79,40 +86,14 @@ def filter_accreditation(filtration_criteria_list):
     return matched_accreditation_count, len(accreditation_ids_list)
 
 
-def help_list(command):
-    """Function that makes logging depends on user input command."""
-    avaliable_commands = \
-        'Список доступних команд:\n- "filter" або "f": Почати фільтрацію\n- "help" ' \
-        'або "h": Отримати список усіх доступних команд\n- "exit" або "e": Завершити фільтрацію' \
-        '\n\nНапишіть команду для виконання. Наприклад "filter"'
-    if command in ("welcome", "w"):
-        logging.info("Ласкаво просимо до системи фільтрації акредитаційних справ NAQA!")
-        logging.info(avaliable_commands)
-    elif command in ("filter", "f"):
-        logging.info("Початок фільтрації!")
-        logging.info(
-            'Визначте наступні критерії фільтрації. Щоб пропустити фільтрацію'
-            ' за параметром необхідно натиснути кнопку "Enter":')
-    elif command in ("help", "h"):
-        logging.info(avaliable_commands)
-    elif command in ("exit", "e"):
-        logging.info("exit")
-        sys.exit("Exiting program")
-    elif command in ("all_commands",):
-        logging.info("\n%s", avaliable_commands)
-    elif command in ("no_such_command",):
-        logging.info("Такої команди немає")
-        logging.info(avaliable_commands)
-
-
 def main():
     """Main function with logic of filtration and console interface for user."""
-    help_list("welcome")
+    user_interface("welcome")
     while True:
         user_command = input()
 
         if user_command in ("filter", "f"):
-            help_list("filter")
+            user_interface("filter")
             delete_old_csv()
 
             input_criteria_list = get_input_criteria()
@@ -121,7 +102,7 @@ def main():
             start = time.time()
             matched_accr_count, all_accr_count = filter_accreditation(criteria_list)
 
-            # For debug
+            # Time the current filtration
             end = time.time()
             time_result = end - start
             logging.debug("Filtration time: %.4f", time_result)
@@ -129,13 +110,13 @@ def main():
             logging.info("Знайдено акредитаційних справ щодо фільтрації: %s", matched_accr_count)
             logging.info("Усього акредитаційних справ було знайдено: %s", all_accr_count)
 
-            help_list("all_commands")
+            user_interface("help")
         elif user_command in ("help", "h"):
-            help_list("help")
+            user_interface("help")
         elif user_command in ("exit", "e"):
-            help_list("exit")
+            user_interface("exit")
         else:
-            help_list("no_such_command")
+            user_interface("no_such_command")
 
 
 if __name__ == '__main__':
