@@ -1,9 +1,11 @@
+import os
 import grequests
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
 RETRY_COUNT = 5
+DEFAULT_KNOWLEDGE_AREA = "04"
 
 s = requests.Session()
 retries = Retry(total=RETRY_COUNT, backoff_factor=0.2, raise_on_redirect=True,
@@ -12,9 +14,13 @@ s.mount('http://', HTTPAdapter(max_retries=retries))
 s.mount('https://', HTTPAdapter(max_retries=retries))
 
 
-def get_all_accreditation_by_area(area="04"):
+def get_all_accreditation_by_area():
     """Get all accreditation cases depends on area specified."""
-    # TODO: Add logic with area defining. Not here
+    if os.environ.get("KNOWLEDGE_AREA") is not None:
+        area = os.environ.get("KNOWLEDGE_AREA")
+    else:
+        area = DEFAULT_KNOWLEDGE_AREA
+
     all_accreditation = requests.get(
         f"https://public.naqa.gov.ua/api/Accreditation/Get?$count=true&$skip=0&$orderBy=id%20desc"
         f"&$filter=contains(tolower(area),%20%27{area}%27)", verify=False)

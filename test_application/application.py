@@ -8,12 +8,12 @@ from request_formation import \
     get_response_json
 from manipulate_csv import \
     delete_old_csv, \
-    build_csv
+    build_csv, \
+    CSV_FILE_NAME
 from prepare_filter_criteria import \
     prepare_filter_criteria, \
     get_input_criteria
 from interface import user_interface
-from manipulate_csv import CSV_FILE_NAME
 
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)

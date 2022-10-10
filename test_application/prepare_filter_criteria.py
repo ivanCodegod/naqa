@@ -1,3 +1,4 @@
+import os
 import logging
 from manipulate_csv import build_csv
 from constants import \
@@ -58,6 +59,8 @@ from constants import \
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 
+DEFAULT_KNOWLEDGE_AREA = "04"
+
 
 def update_csv_headers(header):
     """
@@ -90,6 +93,13 @@ def get_input_criteria():
     exp_higher_education_name = input(input_filtration_criteria(HIGHER_EDUCATION_NAME))
     exp_higher_education_level = input(input_filtration_criteria(HIGHER_EDUCATION_LEVEL))
     exp_knowledge_area = input(input_filtration_criteria(KNOWLEDGE_AREA))
+
+    # set knowledge area as env variable
+    if exp_knowledge_area:
+        os.environ['KNOWLEDGE_AREA'] = exp_knowledge_area.split()[0]
+    else:
+        os.environ['KNOWLEDGE_AREA'] = DEFAULT_KNOWLEDGE_AREA
+
     exp_speciality = input(input_filtration_criteria(SPECIALITY))
     exp_op_name = input(input_filtration_criteria(OP_NAME))
     exp_results_of_consideration_of_the_eg = input(
