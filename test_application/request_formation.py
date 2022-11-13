@@ -8,10 +8,10 @@ RETRY_COUNT = 5
 DEFAULT_KNOWLEDGE_AREA = "04"
 
 s = requests.Session()
-retries = Retry(total=RETRY_COUNT, backoff_factor=0.2, raise_on_redirect=True,
+retries = Retry(total=RETRY_COUNT, backoff_factor=1, raise_on_redirect=True,
                 raise_on_status=True)
-s.mount('http://', HTTPAdapter(max_retries=retries))
-s.mount('https://', HTTPAdapter(max_retries=retries))
+s.mount('http://', HTTPAdapter(max_retries=retries, pool_maxsize=2000))
+s.mount('https://', HTTPAdapter(max_retries=retries, pool_maxsize=2000))
 
 
 def get_all_accreditation_by_area():

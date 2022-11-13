@@ -42,7 +42,7 @@ def filter_accreditation(filtration_criteria_list):
                 logging.debug("function name=%s", str(filter_criteria).split()[1])
                 try:
                     current_filter_criteria = str(filter_criteria(all_accreditation, accr_index))
-                except (TypeError, AttributeError, IndexError):
+                except (KeyError, TypeError, AttributeError, IndexError):
                     matched = False
                     logging.debug("There no such info/path in json body.")
                     break
@@ -51,7 +51,7 @@ def filter_accreditation(filtration_criteria_list):
                 logging.debug("function name=%s", str(filter_criteria).split()[1])
                 try:
                     current_filter_criteria = str(filter_criteria(get_response_json(accreditation)))
-                except (TypeError, AttributeError, IndexError):
+                except (KeyError, TypeError, AttributeError, IndexError):
                     logging.debug("There no such info/path in json body.")
                     matched = False
                     break
