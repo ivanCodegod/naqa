@@ -122,7 +122,7 @@ def main():
 
             logging.info("Усього акредитаційних справ було знайдено: %s", all_accr_count)
             logging.info("Знайдено акредитаційних справ щодо фільтрації: %s", matched_accr_count)
-            logging.info(f"Файл {CSV_FILE_NAME} було сформовано.")
+            logging.info("Файл %s було сформовано.", CSV_FILE_NAME)
 
             user_interface("help")
         elif user_command in ("help", "h"):

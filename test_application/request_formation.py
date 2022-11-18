@@ -6,6 +6,7 @@ from urllib3.util import Retry
 
 RETRY_COUNT = 5
 DEFAULT_KNOWLEDGE_AREA = "04"
+TIMEOUT_COUNT = 60
 
 s = requests.Session()
 retries = Retry(total=RETRY_COUNT, backoff_factor=1, raise_on_redirect=True,
@@ -39,7 +40,7 @@ def get_accreditation_response_list(accr_ids):
     accreditation_requests = [
         f"https://public.naqa.gov.ua/api/v1/Accreditation/{acr_id}/Get" for acr_id in accr_ids
     ]
-    accreditation_response = (grequests.get(url, verify=False) for url in accreditation_requests)
+    accreditation_response = (grequests.get(url, verify=False, timeout=TIMEOUT_COUNT) for url in accreditation_requests)
     accreditation_response_list = grequests.map(accreditation_response)
 
     return accreditation_response_list
