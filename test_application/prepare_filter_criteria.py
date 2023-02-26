@@ -52,7 +52,9 @@ from constants import \
     POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG, \
     POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER, \
     TIME_NA_MEETING, \
-    IN_FORMAT_TIME_NA_MEETING
+    IN_FORMAT_TIME_NA_MEETING, \
+    RESTRICTED_INFORMATION, \
+    POSSIBLE_VARIANTS_FOR_RESTRICTED_INFORMATION
 
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)
@@ -60,6 +62,8 @@ logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 
 DEFAULT_KNOWLEDGE_AREA = "04"
+
+exp_is_restricted_information_value = []
 
 
 def update_csv_headers(header):
@@ -274,6 +278,24 @@ def get_input_criteria():
     if exp_time_na_meeting:
         exp_time_na_meeting = exp_time_na_meeting.split()
 
+    exp_is_restricted_information = input(
+        input_filtration_criteria(
+            RESTRICTED_INFORMATION,
+            POSSIBLE_VARIANTS_FOR_RESTRICTED_INFORMATION
+        )
+    )
+    if exp_is_restricted_information:
+        if exp_is_restricted_information == "так":
+            exp_is_restricted_information = "true"
+        elif exp_is_restricted_information == "ні":
+            # TODO: Also could be 'false' and 'null'. Add 'false' as correct value
+            #exp_is_restricted_information = "None"
+            exp_is_restricted_information = "[]"
+            # TODO: Make the "ні" as default choice when passed
+
+    exp_is_restricted_information_value.clear()
+    exp_is_restricted_information_value.append(exp_is_restricted_information)
+
     input_criteria_value_list = [
         exp_id_program,
         exp_request_number,
@@ -313,7 +335,8 @@ def get_input_criteria():
         exp_op_compliance_level_criterion_8_according_to_ger,
         exp_op_compliance_level_criterion_9_according_to_ger,
         exp_op_compliance_level_criterion_10_according_to_ger,
-        exp_time_na_meeting
+        exp_time_na_meeting,
+        exp_is_restricted_information
     ]
     return input_criteria_value_list
 
@@ -347,3 +370,8 @@ def prepare_filter_criteria(input_criteria_value_list):
 
     build_csv([csv_table_headers])
     return criteria
+
+
+def get_is_restricted_information_state():
+    print(f"bool(exp_is_restricted_information_value[0]): {exp_is_restricted_information_value}")
+    return bool(exp_is_restricted_information_value[0])

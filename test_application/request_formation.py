@@ -3,8 +3,11 @@ import grequests
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
+import logging
 
-RETRY_COUNT = 5
+from filter_params import get_id_program
+
+RETRY_COUNT = 20
 DEFAULT_KNOWLEDGE_AREA = "04"
 TIMEOUT_COUNT = 60
 
@@ -27,6 +30,23 @@ def get_all_accreditation_by_area():
         f"&$filter=contains(tolower(area),%20%27{area}%27)", verify=False)
 
     return all_accreditation
+
+
+def get_self_estimation_response_list(accr_response_list, accr_versions):
+    self_estim_ids = []
+    for accr in accr_response_list:
+        self_estim_id = get_id_program(get_response_json(accr))
+        self_estim_ids.append(self_estim_id)
+        logging.debug(f"self_estim_id: {self_estim_id}")
+
+    self_estimation_requests = [
+        f"https://public.naqa.gov.ua/api{version}/SelfEstimation/{id}/Get" for version, id in
+        zip(accr_versions, self_estim_ids)
+    ]
+    self_estimation_response = (grequests.get(url, verify=False, timeout=TIMEOUT_COUNT) for url in
+                                self_estimation_requests)
+    self_estimation_response_list = grequests.map(self_estimation_response)
+    return self_estimation_response_list
 
 
 def parse_all_accreditation_by_area():
@@ -52,5 +72,24 @@ def get_response_json(response):
 
 
 def collect_accreditation_id(all_accreditation):
-    """Collect accreditation id from all accreditations."""
+    """
+    Collect accreditation id from all accreditations.
+    "accreditationId" from json body.
+    """
     return [accreditation["accreditationId"] for accreditation in all_accreditation["items"]]
+
+
+def collect_accreditation_versions(all_accreditation):
+    """
+    Collect accreditation version from all accreditations.
+    "version" from json body.
+    """
+    acr_versions_list = [accreditation["version"] for accreditation in all_accreditation["items"]]
+
+    for ind, accreditation in enumerate(acr_versions_list):
+        if accreditation == "v0":
+            acr_versions_list[ind] = ""
+        else:
+            acr_versions_list[ind] = "/v1"
+
+    return acr_versions_list

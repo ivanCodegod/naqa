@@ -37,7 +37,8 @@ from filter_params import \
     get_op_compliance_level_criterion_8_according_to_ger, \
     get_op_compliance_level_criterion_9_according_to_ger, \
     get_op_compliance_level_criterion_10_according_to_ger, \
-    get_time_na_meeting
+    get_time_na_meeting, \
+    get_restricted_information_from_self_estim
 
 # Filtration criteria constants. Columns in csv file
 
@@ -131,11 +132,14 @@ POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_EG = '\nМожливі ва�
                                                          '3 - Рівень E\n' \
                                                          '4 - Рівень F\n'
 POSSIBLE_VARIANTS_FOR_COMPLIANCE_LEVEL_CRITERION_BY_GER = '\nМожливі варіанти:\n' \
-                                                         '1 - Рівень A\n' \
-                                                         '2 - Рівень B\n' \
-                                                         '3 - Рівень E\n' \
-                                                         '4 - Рівень F\n'
-
+                                                          '1 - Рівень A\n' \
+                                                          '2 - Рівень B\n' \
+                                                          '3 - Рівень E\n' \
+                                                          '4 - Рівень F\n'
+RESTRICTED_INFORMATION = "Справа містить інформацію з обмеженим доступом"
+POSSIBLE_VARIANTS_FOR_RESTRICTED_INFORMATION = '\nМожливі варіанти:\n' \
+                                               'так - Справа містить інформацію з обмеженим доступом\n' \
+                                               'ні - Справа не містить інформацію з обмеженим доступом\n'
 DEFAULT_CSV_TABLE_HEADERS = [
     ID_PROGRAM,
     AC_NUMBER,
@@ -197,7 +201,8 @@ INPUT_CRITERIA_FUNCTION_LIST = [
     get_op_compliance_level_criterion_8_according_to_ger,
     get_op_compliance_level_criterion_9_according_to_ger,
     get_op_compliance_level_criterion_10_according_to_ger,
-    get_time_na_meeting
+    get_time_na_meeting,
+    get_restricted_information_from_self_estim
 ]
 
 CSV_COLUMN_NAME_LIST = [
@@ -239,5 +244,6 @@ CSV_COLUMN_NAME_LIST = [
     OP_COMPL_LEVEL_CRITERION_8_ACC_TO_GER,
     OP_COMPL_LEVEL_CRITERION_9_ACC_TO_GER,
     OP_COMPL_LEVEL_CRITERION_10_ACC_TO_GER,
-    TIME_NA_MEETING
+    TIME_NA_MEETING,
+    RESTRICTED_INFORMATION
 ]

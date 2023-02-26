@@ -5,7 +5,9 @@ from request_formation import \
     collect_accreditation_id, \
     parse_all_accreditation_by_area, \
     get_accreditation_response_list, \
-    get_response_json
+    get_response_json, \
+    get_self_estimation_response_list, \
+    collect_accreditation_versions
 from manipulate_csv import \
     delete_old_csv, \
     build_csv, \
@@ -14,6 +16,7 @@ from prepare_filter_criteria import \
     prepare_filter_criteria, \
     get_input_criteria
 from interface import user_interface
+from prepare_filter_criteria import get_is_restricted_information_state
 
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)
@@ -27,6 +30,12 @@ def filter_accreditation(filtration_criteria_list):
     accreditation_ids_list = collect_accreditation_id(all_accreditation)
     accreditation_response_list = get_accreditation_response_list(accreditation_ids_list)
 
+    self_estimation_response_list = []
+    is_restricted_information_state = get_is_restricted_information_state()
+    if is_restricted_information_state or is_restricted_information_state == []:
+        accr_versions = collect_accreditation_versions(all_accreditation)
+        self_estimation_response_list = get_self_estimation_response_list(accreditation_response_list, accr_versions)
+
     matched_accreditation_count = 0
     for accr_index, accreditation in enumerate(accreditation_response_list):
         logging.debug("Current accreditation id: %s", accreditation_ids_list[accr_index])
@@ -35,6 +44,8 @@ def filter_accreditation(filtration_criteria_list):
         row_in_csv = []
         for i in filtration_criteria_list:
             filter_criteria, current_filter_value = i[0], i[1]
+            logging.info(f"filter_criteria: {filter_criteria}")
+            logging.info(f"current_filter_value: {current_filter_value}")
 
             # if filtration parameter could be parsed only from all accreditation request
             if "from_all" in str(filter_criteria).split()[1]:
@@ -45,6 +56,14 @@ def filter_accreditation(filtration_criteria_list):
                 except (KeyError, TypeError, AttributeError, IndexError):
                     matched = False
                     logging.debug("There no such info/path in json body.")
+                    break
+            elif "self_estim" in str(filter_criteria).split()[1]:
+                try:
+                    current_filter_criteria = filter_criteria(
+                        get_response_json(self_estimation_response_list[accr_index]))
+                except (KeyError, TypeError, AttributeError, IndexError):
+                    logging.debug("There no such info/path in json body.")
+                    matched = False
                     break
             else:
                 logging.debug("'NOT from all' option. id=%s", accreditation_ids_list[accr_index])
@@ -78,6 +97,16 @@ def filter_accreditation(filtration_criteria_list):
                 if start_datetime <= current_acrr_datetime <= end_datetime:
                     matched = True
                     row_in_csv.append(current_filter_criteria)
+                else:
+                    matched = False
+                    break
+            elif "get_restricted_information" in str(filter_criteria):
+                if current_filter_value == str(current_filter_criteria):
+                    matched = True
+                    row_in_csv.append(current_filter_value)
+                elif current_filter_value == "true" and len(current_filter_criteria) != 0:
+                    matched = True
+                    row_in_csv.append(current_filter_value)
                 else:
                     matched = False
                     break

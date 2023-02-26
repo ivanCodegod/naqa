@@ -245,3 +245,15 @@ def get_time_na_meeting(response):
     Часові межі
     """
     return response["naqaAppointmentMeeting"]["meetingDate"]
+
+
+def get_restricted_information_from_self_estim(response):
+    """
+    Справа містить/немістить інформацію з обмеженим доступом.
+    З SelfEstimation Json файлу
+    """
+    return response["general"]["restrictedInformation"]
+
+
+def get_accreditation_version(response):
+    return response["version"]
