@@ -3,7 +3,7 @@ import os
 
 from accreditation_filter_constants import DEFAULT_CSV_TABLE_HEADERS
 
-CSV_FILE_NAME = 'naqa_system_test.csv'
+CSV_FILE_NAME = 'filtered_accreditation_cases.csv'
 
 
 def delete_old_csv():
