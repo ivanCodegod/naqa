@@ -9,8 +9,7 @@ DEFAULT_KNOWLEDGE_AREA = "04"
 TIMEOUT_COUNT = 60
 
 s = requests.Session()
-retries = Retry(total=RETRY_COUNT, backoff_factor=1, raise_on_redirect=True,
-                raise_on_status=True)
+retries = Retry(total=RETRY_COUNT, backoff_factor=0.2, raise_on_redirect=True, raise_on_status=True)
 s.mount('http://', HTTPAdapter(max_retries=retries, pool_maxsize=2000))
 s.mount('https://', HTTPAdapter(max_retries=retries, pool_maxsize=2000))
 
@@ -22,7 +21,7 @@ def get_all_accreditation_by_area():
     else:
         area = DEFAULT_KNOWLEDGE_AREA
 
-    all_accreditation = requests.get(
+    all_accreditation = s.get(
         f"https://public.naqa.gov.ua/api/Accreditation/Get?$count=true&$skip=0&$orderBy=id%20desc"
         f"&$filter=contains(tolower(area),%20%27{area}%27)", verify=False)
 
