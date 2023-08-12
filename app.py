@@ -1,6 +1,7 @@
 import time
 import logging
 
+import logging_config
 from request_formation import \
     collect_accreditation_id, \
     parse_all_accreditation_by_area, \
@@ -14,11 +15,6 @@ from prepare_filter_criteria import \
     map_filter_criteria, \
     get_input_values_for_filtration, prepare_csv_table
 from interface import AppInterface, AppInterfaceConstants
-
-# Set logging level
-# TODO: Configure this information with help of Poetry(in .toml file)
-logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
 
 
 def filter_accreditation(filtration_criteria_list):
@@ -105,6 +101,8 @@ app_interface = AppInterface()
 
 def main():
     """Main function with logic of filtration and console interface for user."""
+    logging_config.configure_logging()
+
     logging.info(command_descriptions[AppInterfaceConstants.WELCOME_COMMANDS])
     logging.info(command_descriptions[AppInterfaceConstants.HELP_COMMANDS])
 

@@ -8,11 +8,6 @@ from accreditation_filter_constants import \
     AccreditationFilterConstants, \
     FilterFormatConstants
 
-# Set logging level
-# TODO: Configure this information with help of Poetry(in .toml file)
-logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
-
 # TODO: Create config file and move it there
 DEFAULT_KNOWLEDGE_AREA = "04"
 
