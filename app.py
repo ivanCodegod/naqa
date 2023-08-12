@@ -2,11 +2,7 @@ import time
 import logging
 
 import logging_config
-from request_formation import \
-    collect_accreditation_id, \
-    parse_all_accreditation_by_area, \
-    get_accreditation_response_list, \
-    get_response_json
+from request_formation import AccreditationAPIClient
 from manipulate_csv import \
     delete_old_csv, \
     build_csv, \
@@ -19,9 +15,10 @@ from interface import AppInterface, AppInterfaceConstants
 
 def filter_accreditation(filtration_criteria_list):
     """Filter accreditation cases by criteria list."""
-    all_accreditation = parse_all_accreditation_by_area()
-    accreditation_ids_list = collect_accreditation_id(all_accreditation)
-    accreditation_response_list = get_accreditation_response_list(accreditation_ids_list)
+    api_client = AccreditationAPIClient()
+    all_accreditation = api_client.parse_all_accreditation_by_area()
+    accreditation_ids_list = api_client.collect_accreditation_id(all_accreditation)
+    accreditation_response_list = api_client.get_accreditation_response_list(accreditation_ids_list)
 
     matched_accreditation_count = 0
     for accr_index, accreditation in enumerate(accreditation_response_list):
@@ -46,7 +43,7 @@ def filter_accreditation(filtration_criteria_list):
                 logging.debug("'NOT from all' option. id=%s", accreditation_ids_list[accr_index])
                 logging.debug("function name=%s", str(filter_criteria).split()[1])
                 try:
-                    current_filter_criteria = str(filter_criteria(get_response_json(accreditation)))
+                    current_filter_criteria = str(filter_criteria(api_client.get_response_json(accreditation)))
                 except (KeyError, TypeError, AttributeError, IndexError):
                     logging.debug("There no such info/path in json body.")
                     matched = False
