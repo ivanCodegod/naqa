@@ -11,8 +11,8 @@ from manipulate_csv import \
     build_csv, \
     CSV_FILE_NAME
 from prepare_filter_criteria import \
-    prepare_filter_criteria, \
-    get_input_criteria
+    map_filter_criteria, \
+    get_input_values_for_filtration, prepare_csv_table
 from interface import AppInterface, AppInterfaceConstants
 
 # Set logging level
@@ -115,8 +115,9 @@ def main():
             app_interface.handle_command(user_command)
             delete_old_csv()
 
-            input_criteria_list = get_input_criteria()
-            criteria_list = prepare_filter_criteria(input_criteria_list)
+            input_criteria_list = get_input_values_for_filtration()
+            prepare_csv_table(input_criteria_list)
+            criteria_list = map_filter_criteria(input_criteria_list)
 
             start = time.time()
             matched_accr_count, all_accr_count = filter_accreditation(criteria_list)

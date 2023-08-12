@@ -1,6 +1,8 @@
 import csv
 import os
 
+from accreditation_filter_constants import DEFAULT_CSV_TABLE_HEADERS
+
 CSV_FILE_NAME = 'naqa_system_test.csv'
 
 
@@ -15,3 +17,15 @@ def build_csv(row_list):
     with open(f"{CSV_FILE_NAME}", 'a', encoding="utf8", newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC, delimiter=';')
         writer.writerows(row_list)
+
+
+def update_csv_headers(header):
+    """
+    Update scv table headers. Set up default headers if no headers
+     is passed to function or update scv table with passed headers
+     """
+    default_headers = DEFAULT_CSV_TABLE_HEADERS
+    if header not in default_headers:
+        DEFAULT_CSV_TABLE_HEADERS.append(header)
+
+    return DEFAULT_CSV_TABLE_HEADERS
