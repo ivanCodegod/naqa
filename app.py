@@ -13,7 +13,7 @@ from manipulate_csv import \
 from prepare_filter_criteria import \
     prepare_filter_criteria, \
     get_input_criteria
-from interface import user_interface
+from interface import AppInterface, AppInterfaceConstants
 
 # Set logging level
 # TODO: Configure this information with help of Poetry(in .toml file)
@@ -99,14 +99,20 @@ def filter_accreditation(filtration_criteria_list):
     return matched_accreditation_count, len(accreditation_ids_list)
 
 
+command_descriptions = AppInterfaceConstants.COMMAND_DESCRIPTIONS
+app_interface = AppInterface()
+
+
 def main():
     """Main function with logic of filtration and console interface for user."""
-    user_interface("welcome")
+    logging.info(command_descriptions[AppInterfaceConstants.WELCOME_COMMANDS])
+    logging.info(command_descriptions[AppInterfaceConstants.HELP_COMMANDS])
+
     while True:
         user_command = input()
 
-        if user_command in ("filter", "f"):
-            user_interface("filter")
+        if user_command in AppInterfaceConstants.FILTER_COMMANDS:
+            app_interface.handle_command(user_command)
             delete_old_csv()
 
             input_criteria_list = get_input_criteria()
@@ -124,13 +130,13 @@ def main():
             logging.info("Знайдено акредитаційних справ щодо фільтрації: %s", matched_accr_count)
             logging.info("Файл %s було сформовано.", CSV_FILE_NAME)
 
-            user_interface("help")
-        elif user_command in ("help", "h"):
-            user_interface("help")
-        elif user_command in ("exit", "e"):
-            user_interface("exit")
+            logging.info(command_descriptions[AppInterfaceConstants.HELP_COMMANDS])
+        elif user_command in AppInterfaceConstants.HELP_COMMANDS:
+            app_interface.handle_command(user_command)
+        elif user_command in AppInterfaceConstants.EXIT_COMMANDS:
+            app_interface.handle_command(user_command)
         else:
-            user_interface("no_such_command")
+            app_interface.handle_command("no_such_command")
 
 
 if __name__ == '__main__':
