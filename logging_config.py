@@ -4,9 +4,9 @@ from datetime import datetime
 
 
 class LoggingConfigurator:
-    LOG_DIRECTORY = "logs"
+    __LOG_DIRECTORY = "logs"
 
-    def __init__(self, log_directory=LOG_DIRECTORY):
+    def __init__(self, log_directory=__LOG_DIRECTORY):
         self.log_directory = log_directory
         self._configure_logging()
 
