@@ -1,5 +1,7 @@
 import time
 import logging
+from requests import Response
+from typing import Callable
 
 from logging_config import LoggingConfigurator
 from project_settings import ProjectSettingsManager
@@ -15,7 +17,31 @@ from prepare_filter_criteria import \
 from interface import AppInterface, AppInterfaceConstants
 
 
-def filter_accreditation(filtration_criteria_list):
+def apply_filter_criteria(filter_criteria: Callable, accreditation: Response, api_client: AccreditationAPIClient,
+                          all_accreditation: dict, accr_index: int):
+    """
+    Apply the specified filter criteria to the given accreditation.
+
+    Args:
+        filter_criteria (function): The filter criteria function to apply.
+        accreditation (Response): The accreditation information.
+        api_client (AccreditationAPIClient): The API client instance.
+        all_accreditation (dict): All accreditation data.
+        accr_index (int): The index of the current accreditation.
+
+    Returns:
+        str: The result of applying the filter criteria.
+    """
+    try:
+        if "from_all" in str(filter_criteria).split()[1]:
+            return str(filter_criteria(all_accreditation, accr_index))
+        else:
+            return str(filter_criteria(api_client.get_response_json(accreditation)))
+    except (KeyError, TypeError, AttributeError, IndexError):
+        return None
+
+
+def filter_accreditation(filtration_criteria_list: list):
     """Filter accreditation cases by criteria list."""
     api_client = AccreditationAPIClient()
     all_accreditation = api_client.parse_all_accreditation_by_area()
@@ -25,53 +51,36 @@ def filter_accreditation(filtration_criteria_list):
     matched_accreditation_count = 0
     for accr_index, accreditation in enumerate(accreditation_response_list):
         logging.debug("Current accreditation id: %s", accreditation_ids_list[accr_index])
-        matched = False
-
+        matched = True
         row_in_csv = []
-        for i in filtration_criteria_list:
-            filter_criteria, current_filter_value = i[0], i[1]
 
-            # if filtration parameter could be parsed only from all accreditation request
-            if "from_all" in str(filter_criteria).split()[1]:
-                logging.debug("'From all' option. id=%s", accreditation_ids_list[accr_index])
-                logging.debug("function name=%s", str(filter_criteria).split()[1])
-                try:
-                    current_filter_criteria = str(filter_criteria(all_accreditation, accr_index))
-                except (KeyError, TypeError, AttributeError, IndexError):
-                    matched = False
-                    logging.debug("There no such info/path in json body.")
-                    break
-            else:
-                logging.debug("'NOT from all' option. id=%s", accreditation_ids_list[accr_index])
-                logging.debug("function name=%s", str(filter_criteria).split()[1])
-                try:
-                    current_filter_criteria = str(filter_criteria(api_client.get_response_json(accreditation)))
-                except (KeyError, TypeError, AttributeError, IndexError):
-                    logging.debug("There no such info/path in json body.")
-                    matched = False
-                    break
-            if current_filter_value == 'default_criteria':
-                matched = True
+        for filter_criteria, current_filter_value in filtration_criteria_list:
+            logging.debug("Filter criteria: %s", filter_criteria)
+            current_filter_criteria = apply_filter_criteria(
+                filter_criteria, accreditation, api_client, all_accreditation, accr_index
+            )
+
+            if current_filter_criteria is None:
+                matched = False
+                logging.debug("There is no such info/path in the JSON body.")
+                break
+
+            if current_filter_value == 'default_criteria' or current_filter_criteria == current_filter_value:
                 row_in_csv.append(current_filter_criteria)
-            elif current_filter_criteria == current_filter_value:
-                matched = True
-                row_in_csv.append(current_filter_value)
             elif "get_last_name_of_expert" in str(filter_criteria):
-                # not standard filtration. Need to filtrate specifically for last name of expert.
+                # not standard filtration, specifically for the last name of an expert.
                 if current_filter_value in current_filter_criteria:
-                    matched = True
                     row_in_csv.append(current_filter_value)
                 else:
                     matched = False
                     break
             elif "get_time_na_meeting" in str(filter_criteria):
-                # not standard filtration. Need to filtrate specifically for time NA meeting.
-                current_acrr_datetime = current_filter_criteria
+                # not standard filtration, specifically for the time of NA meeting.
                 start_datetime = current_filter_value[0]
                 end_datetime = current_filter_value[1]
+                current_acrr_datetime = current_filter_criteria
 
                 if start_datetime <= current_acrr_datetime <= end_datetime:
-                    matched = True
                     row_in_csv.append(current_filter_criteria)
                 else:
                     matched = False
@@ -79,16 +88,15 @@ def filter_accreditation(filtration_criteria_list):
             else:
                 matched = False
                 logging.debug(
-                    "Filtration was failed for accreditation with id=%s.",
+                    "Filtration failed for accreditation with id=%s.",
                     accreditation_ids_list[accr_index])
                 break
+
         if matched:
-            logging.info(
-                "Accreditation with id=%s is fits the filtration!",
+            logging.debug(
+                "Accreditation with id=%s fits the filtration!",
                 accreditation_ids_list[accr_index])
             matched_accreditation_count += 1
-
-            # Build csv table
             build_csv([row_in_csv])
 
     return matched_accreditation_count, len(accreditation_ids_list)
