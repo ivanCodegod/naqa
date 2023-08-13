@@ -1,15 +1,17 @@
 import time
 import logging
 
-import logging_config
+from logging_config import LoggingConfigurator
+from project_settings import ProjectSettingsManager
+
 from request_formation import AccreditationAPIClient
 from manipulate_csv import \
     delete_old_csv, \
-    build_csv, \
-    CSV_FILE_NAME
+    build_csv
 from prepare_filter_criteria import \
     map_filter_criteria, \
     get_input_values_for_filtration, prepare_csv_table
+
 from interface import AppInterface, AppInterfaceConstants
 
 
@@ -98,7 +100,7 @@ app_interface = AppInterface()
 
 def main():
     """Main function with logic of filtration and console interface for user."""
-    logging_config.configure_logging()
+    LoggingConfigurator()
 
     logging.info(command_descriptions[AppInterfaceConstants.WELCOME_COMMANDS])
     logging.info(command_descriptions[AppInterfaceConstants.HELP_COMMANDS])
@@ -124,7 +126,7 @@ def main():
 
             logging.info("Усього акредитаційних справ було знайдено: %s", all_accr_count)
             logging.info("Знайдено акредитаційних справ щодо фільтрації: %s", matched_accr_count)
-            logging.info("Файл %s було сформовано.", CSV_FILE_NAME)
+            logging.info("Файл %s було сформовано.", ProjectSettingsManager.CSV_FILE_NAME)
 
             logging.info(command_descriptions[AppInterfaceConstants.HELP_COMMANDS])
         elif user_command in AppInterfaceConstants.HELP_COMMANDS:

@@ -7,12 +7,7 @@ from requests import Response
 from urllib3.util import Retry
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-DEFAULT_KNOWLEDGE_AREA = "04"
-
-RETRY_COUNT = 5
-POOL_MAX_SIZE = 300
-TIMEOUT_COUNT = 15
-BACKOFF_FACTOR = 0.2
+from project_settings import ProjectSettingsManager
 
 
 class CustomRetry(Retry):
@@ -58,11 +53,15 @@ class CustomRetry(Retry):
 
 
 class AccreditationAPIClient:
-    def __init__(self, retry_count=RETRY_COUNT, pool_max_size=POOL_MAX_SIZE, timeout_count=TIMEOUT_COUNT):
+    def __init__(self,
+                 retry_count: int = ProjectSettingsManager.RETRY_COUNT,
+                 pool_max_size: int = ProjectSettingsManager.POOL_MAX_SIZE,
+                 timeout_count: int = ProjectSettingsManager.TIMEOUT_COUNT
+                 ):
         self.s = requests.Session()
         self.custom_retry = CustomRetry(
             total=retry_count,
-            backoff_factor=BACKOFF_FACTOR,
+            backoff_factor=ProjectSettingsManager.BACKOFF_FACTOR,
             raise_on_redirect=True,
             raise_on_status=True
         )
@@ -70,25 +69,28 @@ class AccreditationAPIClient:
         self.timeout_count = timeout_count
 
     @staticmethod
-    def collect_accreditation_id(all_accreditation):
+    def collect_accreditation_id(all_accreditation: dict) -> list:
         """Collect accreditation id from all accreditations."""
         return [accreditation["accreditationId"] for accreditation in all_accreditation["items"]]
 
     @staticmethod
-    def get_response_json(response):
+    def get_response_json(response: Response) -> dict:
         """Return response in json format."""
         return response.json()
 
-    def get_all_accreditation_by_area(self):
+    def get_all_accreditation_by_area(self) -> Response:
         """Get all accreditation cases depends on area specified."""
         if os.environ.get("KNOWLEDGE_AREA") is not None:
             area = os.environ.get("KNOWLEDGE_AREA")
         else:
-            area = DEFAULT_KNOWLEDGE_AREA
+            area = ProjectSettingsManager.DEFAULT_KNOWLEDGE_AREA
 
         all_accreditation = self.s.get(
             f"https://public.naqa.gov.ua/api/Accreditation/Get?$count=true&$skip=0&$orderBy=id%20desc"
-            f"&$filter=contains(tolower(area),%20%27{area}%27)", verify=False)
+            f"&$filter=contains(tolower(area),%20%27{area}%27)",
+            verify=False,
+            timeout=ProjectSettingsManager.TIMEOUT_COUNT
+        )
         return all_accreditation
 
     def get_accreditation_response_list(self, accreditation_ids: list[str]) -> list[Response]:
@@ -132,7 +134,7 @@ class AccreditationAPIClient:
         :return: A Response object if the request is successful, otherwise None.
         """
         try:
-            response = self.s.get(url, verify=False, timeout=TIMEOUT_COUNT)
+            response = self.s.get(url, verify=False, timeout=ProjectSettingsManager.TIMEOUT_COUNT)
 
             logging.debug(f"Response {url} - Status Code: {response.status_code}")
             if response.status_code != 200:
@@ -145,7 +147,7 @@ class AccreditationAPIClient:
 
         return None
 
-    def parse_all_accreditation_by_area(self):
+    def parse_all_accreditation_by_area(self) -> dict:
         """
         Parse all accreditation cases within the specified knowledge area.
 

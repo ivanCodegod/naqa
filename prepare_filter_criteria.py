@@ -7,12 +7,10 @@ from accreditation_filter_constants import \
     CSV_TABLE_HEADERS, \
     AccreditationFilterConstants, \
     FilterFormatConstants
-
-# TODO: Create config file and move it there
-DEFAULT_KNOWLEDGE_AREA = "04"
+from project_settings import ProjectSettingsManager
 
 
-def input_filtration_criteria(criteria, additional_comment=""):
+def input_filtration_criteria(criteria: str, additional_comment: str = "") -> str:
     """Decorate text connected with filter parameter."""
     text = f"Введіть очікуваний '{criteria}' параметр для фільтрації"
     return text + ": " if not additional_comment else text + "." + f" {additional_comment}: "
@@ -35,7 +33,7 @@ def get_input_values_for_filtration() -> list:
     if exp_knowledge_area:
         os.environ['KNOWLEDGE_AREA'] = exp_knowledge_area.split()[0]
     else:
-        os.environ['KNOWLEDGE_AREA'] = DEFAULT_KNOWLEDGE_AREA
+        os.environ['KNOWLEDGE_AREA'] = ProjectSettingsManager.DEFAULT_KNOWLEDGE_AREA
 
     exp_speciality = input(input_filtration_criteria(AccreditationFilterConstants.SPECIALITY))
     exp_op_name = input(input_filtration_criteria(AccreditationFilterConstants.OP_NAME))
@@ -287,7 +285,7 @@ def map_filter_criteria(input_filtration_values_list: list) -> list[list]:
     return criteria
 
 
-def prepare_csv_table(input_filtration_values_list):
+def prepare_csv_table(input_filtration_values_list: list):
     """
     Prepare and write the CSV table headers for the filtered accreditation cases.
 
